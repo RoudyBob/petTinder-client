@@ -1,24 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Auth from './Auth/Auth';
+import Navigation from './components/Homepage/Navigation';
+import './myStyles.css'
 
 function App() {
+
+  const [sessionToken, setSessionToken] = useState('');
+
+  useEffect(() => {
+    if (localStorage.getItem('token')){
+      setSessionToken(localStorage.getItem('token'));
+  }
+}, [])
+
+const updateToken = (newToken) => {
+  localStorage.setItem('token', newToken);
+  setSessionToken(newToken);
+  console.log(newToken);
+}
+
+const clearToken =() => {
+  localStorage.clear();
+  setSessionToken('');
+}
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+<>
+      <Navigation clickLogout={clearToken} />
+      <Auth updateToken={updateToken}/>
+    </>
   );
 }
 
