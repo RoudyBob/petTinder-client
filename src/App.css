@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: url('https://i.imgur.com/WxmAccB.jpg');
+  background-color: pink;
 }
 
 .App-logo {
@@ -35,4 +38,9 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.Container {
+  width: 300px;
+  border-radius: 20px;
 }
