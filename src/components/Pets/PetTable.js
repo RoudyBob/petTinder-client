@@ -43,7 +43,6 @@ const PetTable = (props) => {
             <Table striped>
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Name</th>
                         <th>Breed</th>
                         <th>Gender</th>
