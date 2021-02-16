@@ -13,9 +13,11 @@ const PetCreate = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        let body = JSON.stringify({pet: {dogname: dogname, breed: breed, gender: gender, citylocation: citylocation, statelocation: statelocation, description: description, photourl: photourl}});
+        console.log(body);
         fetch('http://localhost:3000/pet/', {
             method: 'POST',
-            body: JSON.stringify({pet: {dogname: dogname, breed: breed, gender: gender, citylocation: citylocation, statelocation: statelocation, description: description, photourl: photourl}}),
+            body: JSON.stringify({dogname: dogname, breed: breed, gender: gender, citylocation: citylocation, statelocation: statelocation, description: description, photourl: photourl}),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': props.token
