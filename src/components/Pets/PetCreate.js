@@ -23,9 +23,13 @@ const PetCreate = (props) => {
         }) .then ((res) => res.json())
         .then((petData) => {
             console.log(petData);
+            setDogName('');
+            setBreed('');
+            setGender('');
+            setCityLocation('');
+            setStateLocation('');
             setDescription('');
-            setDefinition('');
-            setResult('')
+            setPhotoUrl('');
             props.fetchPets();
         })
     }
