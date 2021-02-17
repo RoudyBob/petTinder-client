@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PetIndex from '../Pets/PetIndex';
 import {
     Navbar,
     NavbarBrand,
@@ -8,6 +9,12 @@ import {
     NavItem,
     Button
 } from 'reactstrap';
+import {
+    Route,
+    Link,
+    Switch,
+    BrowserRouter
+} from 'react-router-dom';
 
 const Navigation = (props) => {
 
@@ -42,6 +49,9 @@ const Navigation = (props) => {
             <NavbarBrand href="/" style={tinderHeader}>pettinder.</NavbarBrand>
             <br /><p style={headerSubtitle}>where dog breeders meet.</p>
                 <Nav className="ml-auto" navbar>
+                    <NavItem>
+                        {localStorage.getItem('token') ? <Button href="/mypets" style={buttonColor}>My Pets</Button> : <></>}
+                    </NavItem>
                     <NavItem>
                         {localStorage.getItem('token') ? <Button onClick={props.clickLogout} style={buttonColor}>Logout</Button> : <></>}
                     </NavItem>
