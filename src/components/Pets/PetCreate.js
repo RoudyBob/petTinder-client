@@ -13,8 +13,6 @@ const PetCreate = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let body = JSON.stringify({pet: {dogname: dogname, breed: breed, gender: gender, citylocation: citylocation, statelocation: statelocation, description: description, photourl: photourl}});
-        console.log(body);
         fetch('http://localhost:3000/pet/', {
             method: 'POST',
             body: JSON.stringify({dogname: dogname, breed: breed, gender: gender, citylocation: citylocation, statelocation: statelocation, description: description, photourl: photourl}),
@@ -47,14 +45,14 @@ const PetCreate = (props) => {
                 <FormGroup>
                     <Label htmlFor="breed"/>
                     <Input name="breed" value={breed} onChange={(e) => setBreed(e.target.value)}/>
-                    </FormGroup>
-                    <FormGroup>
+                </FormGroup>
+                <FormGroup>
                     <Input type="select" name="Gender" value={gender} onChange={(e) => setGender (e.target.value)}>
                     <option></option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     </Input>
-                    </FormGroup>
+                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="citylocation"/>
                     <Input name="City" value={citylocation} onChange={(e) => setCityLocation(e.target.value)}/>
