@@ -45,7 +45,6 @@ const Navigation = (props) => {
     }
 
     return ( 
-        <BrowserRouter>
         <Navbar color="faded" light expand="md" style={navColor}>
             <NavbarBrand href="/" style={tinderHeader}>pettinder.</NavbarBrand>
             <br /><p style={headerSubtitle}>where dog breeders meet.</p>
@@ -56,9 +55,8 @@ const Navigation = (props) => {
                     <NavItem>
                         {localStorage.getItem('token') ? <Button onClick={props.clickLogout} style={buttonColor}>Logout</Button> : <></>}
                     </NavItem>
-                   </Nav>
+                </Nav>
         </Navbar>
-        </BrowserRouter>
      )
 }
  
