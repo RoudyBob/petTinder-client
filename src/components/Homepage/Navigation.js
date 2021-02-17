@@ -15,7 +15,6 @@ import {
     Switch,
     BrowserRouter
 } from 'react-router-dom';
-import PetIndex from '../Pets/PetIndex';
 
 const Navigation = (props) => {
 
@@ -46,7 +45,6 @@ const Navigation = (props) => {
     }
 
     return ( 
-        <BrowserRouter>
         <Navbar color="faded" light expand="md" style={navColor}>
             <NavbarBrand href="/" style={tinderHeader}>pettinder.</NavbarBrand>
             <br /><p style={headerSubtitle}>where dog breeders meet.</p>
@@ -57,13 +55,9 @@ const Navigation = (props) => {
                     <NavItem>
                         {localStorage.getItem('token') ? <Button onClick={props.clickLogout} style={buttonColor}>Logout</Button> : <></>}
                     </NavItem>
-                <Switch>
-                    <Route exact path="/manage"><PetIndex /></Route>
-                        {localStorage.getItem('token') ? <Button onClick={props.clickLogout} style={buttonColor}>Logout</Button> : <></>}
-                   </Switch>
-                   </Nav>
+
+                </Nav>
         </Navbar>
-        </BrowserRouter>
      )
 }
  
