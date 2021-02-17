@@ -32,6 +32,7 @@ const buttonColor = {
     border: "none"
 }
 
+
 const handleSubmit = (event) => {
     event.preventDefault();
     setEmailErr(false);
