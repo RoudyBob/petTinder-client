@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PetIndex from '../Pets/PetIndex';
 import {
     Navbar,
     NavbarBrand,
@@ -51,7 +52,10 @@ const Navigation = (props) => {
             <br /><p style={headerSubtitle}>where dog breeders meet.</p>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
-                    <Link to="/manage">Manage Your Pets</Link>
+                        {localStorage.getItem('token') ? <Button href="/mypets" style={buttonColor}>My Pets</Button> : <></>}
+                    </NavItem>
+                    <NavItem>
+                        {localStorage.getItem('token') ? <Button onClick={props.clickLogout} style={buttonColor}>Logout</Button> : <></>}
                     </NavItem>
                 <Switch>
                     <Route exact path="/manage"><PetIndex /></Route>
