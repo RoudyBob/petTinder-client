@@ -1,9 +1,11 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Auth from './Auth/Auth';
 import Navigation from './components/Homepage/Navigation';
 import PetIndex from './components/Pets/PetIndex';
+import PetSwipe from './components/Homepage/PetSwipe';
 import './myStyles.css'
 
 function App() {
@@ -27,14 +29,23 @@ const clearToken =() => {
   setSessionToken('');
 }
 
-const protectedViews = () => {
+const petIndexView = () => {
   return (sessionToken === localStorage.getItem('token') ? <PetIndex token={sessionToken} /> : <Auth updateToken={updateToken} />)
+};
+
+const petSwipeView = () => {
+  return (sessionToken === localStorage.getItem('token') ? <PetSwipe token={sessionToken} /> : <Auth updateToken={updateToken} />)
 };
 
   return (
     <div>
-      <Navigation clickLogout={clearToken} />
-      {protectedViews()}
+      <BrowserRouter>
+        <Navigation clickLogout={clearToken} />
+        <Switch>
+          <Route exact path="/" component={petSwipeView} />
+          <Route path="/mypets" component={petIndexView} />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
