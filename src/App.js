@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Auth from './Auth/Auth';
 import Navigation from './components/Homepage/Navigation';
 import './myStyles.css'
+import PetSwipe from './components/Homepage/PetSwipe';
 
 function App() {
 
@@ -30,6 +31,7 @@ const clearToken =() => {
 <>
       <Navigation clickLogout={clearToken} />
       <Auth updateToken={updateToken}/>
+      <PetSwipe/>
     </>
   );
 }
