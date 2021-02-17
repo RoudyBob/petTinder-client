@@ -5,6 +5,7 @@ import Auth from './Auth/Auth';
 import Navigation from './components/Homepage/Navigation';
 import PetIndex from './components/Pets/PetIndex';
 import './myStyles.css'
+import PetSwipe from './components/Homepage/PetSwipe';
 
 function App() {
 
@@ -28,7 +29,7 @@ const clearToken =() => {
 }
 
 const protectedViews = () => {
-  return (sessionToken === localStorage.getItem('token') ? <PetIndex token={sessionToken} /> : <Auth updateToken={updateToken} />)
+  return (sessionToken === localStorage.getItem('token') ? <PetSwipe token={sessionToken} /> : <Auth updateToken={updateToken} />)
 };
 
   return (
