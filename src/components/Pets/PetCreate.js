@@ -15,7 +15,7 @@ const PetCreate = (props) => {
         e.preventDefault();
         fetch('http://localhost:3000/pet/', {
             method: 'POST',
-            body: JSON.stringify({pet: {dogname: dogname, breed: breed, gender: gender, citylocation: citylocation, statelocation: statelocation, description: description, photourl: photourl}}),
+            body: JSON.stringify({dogname: dogname, breed: breed, gender: gender, citylocation: citylocation, statelocation: statelocation, description: description, photourl: photourl}),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': props.token
@@ -51,7 +51,6 @@ const PetCreate = (props) => {
                     <option></option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
-                    <option value="Distance">Distance</option>
                     </Input>
                     </FormGroup>
                 <FormGroup>
