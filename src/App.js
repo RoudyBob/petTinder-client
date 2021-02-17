@@ -7,6 +7,7 @@ import Navigation from './components/Homepage/Navigation';
 import PetIndex from './components/Pets/PetIndex';
 import PetSwipe from './components/Homepage/PetSwipe';
 import './myStyles.css'
+import PetSwipe from './components/Homepage/PetSwipe';
 
 function App() {
 
@@ -28,6 +29,7 @@ const clearToken =() => {
   localStorage.clear();
   setSessionToken('');
 }
+
 
 const petIndexView = () => {
   return (sessionToken === localStorage.getItem('token') ? <PetIndex token={sessionToken} /> : <Auth updateToken={updateToken} />)
