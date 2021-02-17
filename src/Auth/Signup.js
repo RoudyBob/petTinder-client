@@ -30,6 +30,7 @@ const buttonColor = {
     border: "none"
 }
 
+
 const handleSubmit = (event) => {
     event.preventDefault();
     fetch("http://localhost:3000/user/signup", {
