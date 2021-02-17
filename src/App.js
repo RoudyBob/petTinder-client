@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Auth from './Auth/Auth';
 import Navigation from './components/Homepage/Navigation';
+import PetIndex from './components/Pets/PetIndex';
 import './myStyles.css'
 import PetSwipe from './components/Homepage/PetSwipe';
 
@@ -27,12 +28,15 @@ const clearToken =() => {
   setSessionToken('');
 }
 
+const protectedViews = () => {
+  return (sessionToken === localStorage.getItem('token') ? <PetSwipe token={sessionToken} /> : <Auth updateToken={updateToken} />)
+};
+
   return (
-<>
+    <div>
       <Navigation clickLogout={clearToken} />
-      <Auth updateToken={updateToken}/>
-      <PetSwipe/>
-    </>
+      {protectedViews()}
+    </div>
   );
 }
 
