@@ -7,6 +7,7 @@ import Navigation from './components/Homepage/Navigation';
 import PetIndex from './components/Pets/PetIndex';
 import PetSwipe from './components/Homepage/PetSwipe';
 import './myStyles.css'
+import Signup from './Auth/Signup';
 
 function App() {
 
@@ -38,6 +39,12 @@ const petSwipeView = () => {
   return (sessionToken === localStorage.getItem('token') ? <PetSwipe token={sessionToken} /> : <Auth updateToken={updateToken} />)
 };
 
+const signupView = () => {
+  return (
+    <Signup />
+  )
+}
+
   return (
     <div>
       <BrowserRouter>
@@ -45,6 +52,7 @@ const petSwipeView = () => {
         <Switch>
           <Route exact path="/" component={petSwipeView} />
           <Route path="/mypets" component={petIndexView} />
+          <Route path="/signup" component={signupView} />
         </Switch>
       </BrowserRouter>
     </div>
