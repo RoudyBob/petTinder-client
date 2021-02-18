@@ -4,13 +4,29 @@ import {Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCap
 
 const PetSwipe = (props) => {
     const [allPets, setAllPets] = useState([]);
-    const [dogname, setDogname] = useState('');
-    const [breed, setBreed] = useState('');
-    const [gender, setGender] = useState('');
-    const [citylocation, setCityLocation] = useState('');
-    const [statelocation, setStateLocation] = useState('');
-    const [description, setDescription] = useState('');
-    const [photourl, setPhotoUrl] = useState('');
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [animating, setAnimating] = useState(false);
+
+    useEffect(() => {
+        fetchPets();
+    }, []);
+
+  const next = () => {
+    if (animating) return;
+    const nextIndex = activeIndex === allPets.length - 1 ? 0 : activeIndex + 1;
+    setActiveIndex(nextIndex);
+  }
+
+  const previous = () => {
+    if (animating) return;
+    const nextIndex = activeIndex === 0 ? allPets.length - 1 : activeIndex - 1;
+    setActiveIndex(nextIndex);
+  }
+
+  const goToIndex = (newIndex) => {
+    if (animating) return;
+    setActiveIndex(newIndex);
+  } 
 
     const fetchPets = () => {
         console.log('hi there');
@@ -26,26 +42,37 @@ const PetSwipe = (props) => {
     })
 }
 
-useEffect(() => {
-    fetchPets();
-}, []);
+
 
 const slides = () => {
     return allPets.map((pet) => {
     return (
         <CarouselItem key={pet.id}>
-            <CarouselCaption captionText={pet.dogname} captionHeader={pet.breed} />
+            
+            <img src="https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png" style={{height: 400 + 'px', width: 'auto'}}/>
+            
+            <CarouselCaption captionText={pet.dogname} captionHeader={pet.breed} />  
+            <div className="pet-carousel">
+                {pet.gender}<br></br>
+                {pet.citylocation}<br></br>
+                {pet.statelocation}<br></br>
+                {pet.description}
+            </div>   
         </CarouselItem>
         
     );
 })};
 
+
     return ( 
-        <div><p>The Carousel is Below</p>
-            <Carousel>
-                {slides()}
-            </Carousel>
-        </div>
+        
+        <Carousel activeIndex={activeIndex} next={next} previous={previous}>
+            <CarouselIndicators items={allPets} activeIndex={activeIndex} onClickHandler={goToIndex}/>
+            {slides()}
+            <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
+            <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
+        </Carousel>
+        
      ); 
 }
  

@@ -79,11 +79,11 @@ const handleSubmit = (event) => {
             </h1></center>
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
-                    <Input onChange={(e) => setUsername(e.target.value)} name="username" value={username} placeholder="email" style={inputBorder}/>
+                    <Input type="email" onChange={(e) => setUsername(e.target.value)} name="username" value={username} placeholder="email" style={inputBorder}/>
                     {emailErr ? <p>Please enter a valid email address.</p> : <></>}
                 </FormGroup>
                 <FormGroup>
-                    <Input onChange={(e) => setPassword(e.target.value)} name="password" value={password} placeholder="password" style={inputBorder}/>
+                    <Input type="password" onChange={(e) => setPassword(e.target.value)} name="password" value={password} placeholder="password" style={inputBorder}/>
                     {passwordErr ? <p>Password must be 5 characters or greater.</p> : <></>}
                 </FormGroup>
                 <FormGroup>

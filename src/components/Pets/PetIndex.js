@@ -4,8 +4,7 @@ import PetCreate from './PetCreate';
 import PetTable from './PetTable';
 import PetEdit from './PetEdit';
 
-
-const url = 'http://localhost:3000/pet'
+const url = 'http://localhost:3000/pet/mine'
 
 const PetIndex = (props) => {
    
