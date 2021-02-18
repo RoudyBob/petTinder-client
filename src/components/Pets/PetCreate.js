@@ -34,6 +34,24 @@ const PetCreate = (props) => {
         setPhotoUrl('')
     }
 
+    const formStyle={
+        backgroundColor: "white",
+        padding: "40px",
+        width: "400px",
+        marginTop: "60px"
+    }
+
+    const titleStyle={
+        color: "coral",
+        letterSpacing: "-1px"
+    }
+    const buttonStyle={
+        backgroundColor: "coral",
+        border: "none",
+        marginTop: "10px",
+        marginBottom: "10px"
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         fetch('http://localhost:3000/pet/', {
@@ -59,10 +77,11 @@ const PetCreate = (props) => {
 
     return ( 
         <>
-            <h3>Submit your Pooch!</h3>
-            <Form onSubmit={handleSubmit}>
+            
+            <Form onSubmit={handleSubmit} style={formStyle}>
                 <FormGroup>
-                    <Label htmlFor="dogname"/>Name
+                <center><h3 style={titleStyle}>submit your pooch!</h3></center>
+                    <Label htmlFor="dogname"/>
                     <Input name="Name" value={dogname} onChange={(e) => setDogName(e.target.value)} onClick={clearDog}/>
                 </FormGroup>
                 <FormGroup>
@@ -92,7 +111,7 @@ const PetCreate = (props) => {
                 <Label htmlFor="photourl"/>
                     <Input name="Photo of Pet (URL)" value={photourl} onChange={(e) => setPhotoUrl(e.target.value)} onClick={clearPhoto}/>
                 </FormGroup>
-                <Button type="submit">Click to Submit</Button>
+                <center><Button type="submit" style={buttonStyle}>Click to Submit</Button></center>
             </Form>
         </>
      );

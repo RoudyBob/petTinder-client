@@ -14,16 +14,12 @@ const Auth = (props) => {
         borderRadius: '10px',
         fontFamily: 'Arial',
       };
-
-    function handleToggle () {
-        setShowLogin(!showLogin)
-    }
+    
     
     return ( 
         <Container style={divStyle}>
             {showLogin === true ? <Login updateToken={props.updateToken}/> : <Signup updateToken={props.updateToken}/>}
-        <center><br />Not a user?
-        <br /><Button color="link" onClick = {handleToggle}>Sign up!</Button></center>
+        <center><br /><p>Not a user? <br /> <Button color="link" href="/signup">Sign up!</Button></p></center>
        </Container>
      );
 }
