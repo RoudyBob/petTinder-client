@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import {Form, FormGroup, Label, Input, Button, Container} from 'reactstrap';
 
 const Signup = (props) => {
 const [username, setUsername] = useState('');
@@ -32,6 +32,16 @@ const buttonColor = {
     border: "none"
 }
 
+    const divStyle = {
+        width: '350px',
+        height: '490px',
+        marginTop: '100px',
+        backgroundColor: "white",
+        border: '2px solid lightgrey',
+        borderRadius: '10px',
+        fontFamily: 'Arial',
+      };
+
 
 const handleSubmit = (event) => {
     event.preventDefault();
@@ -62,7 +72,7 @@ const handleSubmit = (event) => {
 }
 
     return ( 
-        <div>
+        <Container style={divStyle}>
             <center><h1 style={heading}>find your pet's
                 <br />
                 <span style={spanStyle}>pawfect</span> match
@@ -84,7 +94,7 @@ const handleSubmit = (event) => {
                 </FormGroup>
                 <center><Button type="submit" style={buttonColor}>Sign Up</Button></center>
             </Form>
-        </div>
+        </Container>
      );
 }
  

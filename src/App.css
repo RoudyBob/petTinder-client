@@ -43,3 +43,49 @@
   width: 300px;
   border-radius: 20px;
 }
+
+/* Carousel styles */
+
+.slide {
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.carousel-inner {
+  max-width: 550px;
+  margin: auto;
+}
+
+
+.carousel-control-next-icon {
+  background-image: url("./assets/paw.jpg") !important;
+  transform: rotate(30deg);
+ }
+
+ .carousel-control-prev-icon {
+  background-image: url("./assets/paw.jpg") !important;
+  transform: rotate(-30deg);
+ }
+
+ .carousel-control-prev {
+   position: relative;
+   right: 300px;
+ }
+ 
+ .carousel-caption {
+   position: relative;
+   top: 0px;
+ }
+
+ .pet-carousel {
+   color: white;
+   position: relative;
+   top: -200px;
+   left: 20px;
+ }
+
+ .carousel-indicators {
+  position: relative;
+  top: 370px;
+}

@@ -15,6 +15,24 @@ const PetCreate = (props) => {
     const [data, getFile] = useState({ name: "", path: "" }); // storing the recived file from backend
     const [fileInputKey, setFileInputKey] = useState('');
 
+    const formStyle={
+        backgroundColor: "white",
+        padding: "40px",
+        width: "400px",
+        marginTop: "60px"
+    }
+
+    const titleStyle={
+        color: "coral",
+        letterSpacing: "-1px"
+    }
+    const buttonStyle={
+        backgroundColor: "coral",
+        border: "none",
+        marginTop: "10px",
+        marginBottom: "10px"
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         uploadFile();
@@ -77,9 +95,10 @@ const PetCreate = (props) => {
 
     return ( 
         <>
-            <h3>Submit your Pooch!</h3>
-            <Form onSubmit={handleSubmit}>
+            
+            <Form onSubmit={handleSubmit} style={formStyle}>
                 <FormGroup>
+                    <center><h3 style={titleStyle}>submit your pooch!</h3></center>
                     <Label htmlFor="dogname">Dog's Name</Label>
                     <Input name="Name" placeholder="Spot" value={dogname} onChange={(e) => setDogName(e.target.value)} />
                 </FormGroup>
@@ -113,7 +132,7 @@ const PetCreate = (props) => {
                     {/* <Input type="file" id="petphoto" ref={el} onChange={handleChange}/> */}
                     <Input type="file" id="photopicker" accept="image/*" onChange={fileInputChange} key={fileInputKey} />
                 </FormGroup>
-                <Button type="submit">Click to Submit</Button>
+                <center><Button type="submit" style={buttonStyle}>Click to Submit</Button></center>
             </Form>
         </>
      );

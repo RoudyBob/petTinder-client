@@ -12,6 +12,30 @@ const PetIndex = (props) => {
     const [updateActive, setUpdateActive] = useState(false);
     const [petToUpdate, setPetToUpdate] = useState({});
 
+    const divStyle={
+        padding: "30px",
+        display: "flex",
+        justifyContent: "center"
+    }
+
+    
+    const fetchPets = () => {
+        console.log(url);
+        fetch(url, {
+            method: 'GET',
+            headers: new Headers ({
+                'Content-Type': 'application-json',
+                'Authorization': props.token
+            })
+        })
+            .then((response) => response.json())
+            .then((petData) => { setPets(petData); console.log(petData) })
+    }
+
+    useEffect(() => {
+        fetchPets();
+    }, []);
+
     const editPet = (pet) => {
         setPetToUpdate(pet);
         console.log(pet);
@@ -25,35 +49,18 @@ const PetIndex = (props) => {
         setUpdateActive(false);
     }
 
-    const fetchPets = () => {
-        console.log(url);
-        fetch(url, {
-            method: 'GET',
-            headers: new Headers ({
-                'Content-Type': 'application/json',
-                'Authorization': props.token
-            })
-        })
-            .then((response) => response.json())
-            .then((petData) => { setPets(petData); console.log(petData) })
-    }
-
-    useEffect(() => {
-        fetchPets();
-    }, []);
 
     return (
-        <div>
+        <div style={divStyle}>
             <Container>
-                <Row>
-                    <Col md="3">
-                        <PetCreate fetchPets={fetchPets} token={props.token} />
+            <Col xs="auto">
+                        <center><PetCreate fetchPets={fetchPets} token={props.token} /></center>
                     </Col>
-                    <Col md="9">
+                    <br/>
+                    <Col lg>
                         <PetTable pets={pets} editPet={editPet} updateOn={updateOn} fetchPets={fetchPets} token={props.token} />
                     </Col>
                     {updateActive ? <PetEdit petToUpdate={petToUpdate} updateOff={updateOff} token={props.token} fetchPets={fetchPets} /> : <></> }
-                </Row>
             </Container>
         </div>
     );
