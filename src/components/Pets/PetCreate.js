@@ -1,41 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import axios from 'axios';
 
 const PetCreate = (props) => {
-    const [dogname, setDogName] = useState('Name');
-    const [breed, setBreed] = useState('Breed');
-    const [gender, setGender] = useState('Gender');
-    const [citylocation, setCityLocation] = useState('City');
-    const [statelocation, setStateLocation] = useState('State');
-    const [description, setDescription] = useState('Decription');
-    const [photourl, setPhotoUrl] = useState('Photo (URL)');
+    const [dogname, setDogName] = useState('');
+    const [breed, setBreed] = useState('');
+    const [gender, setGender] = useState('');
+    const [citylocation, setCityLocation] = useState('');
+    const [statelocation, setStateLocation] = useState('');
+    const [description, setDescription] = useState('');
+    const [photourl, setPhotoUrl] = useState('');
 
-    const clearDog = () => {
-        setDogName('')
-    }
-
-    const clearBreed = () => {
-        setBreed('')
-    }
-    
-    const clearCity = () => {
-        setCityLocation('')
-    }
-
-    const clearState = () => {
-        setStateLocation('')
-    }
-
-    const clearDescription = () => {
-        setDescription('')
-    }
-
-    const clearPhoto = () => {
-        setPhotoUrl('')
-    }
+    const [file, setFile] = useState(''); // storing the uploaded file  
+    const [data, getFile] = useState({ name: "", path: "" }); // storing the recived file from backend
+    const [fileInputKey, setFileInputKey] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        uploadFile();
         fetch('http://localhost:3000/pet/', {
             method: 'POST',
             body: JSON.stringify({dogname: dogname, breed: breed, gender: gender, citylocation: citylocation, statelocation: statelocation, description: description, photourl: photourl}),
@@ -52,24 +34,61 @@ const PetCreate = (props) => {
             setCityLocation('');
             setStateLocation('');
             setDescription('');
-            setPhotoUrl('');
+            setFileInputKey(Date.now()); //resets key on File Input which re-renders it to clear out filename
             props.fetchPets();
         })
     }
+
+    const fileInputChange = (e) => {
+        const file = e.target.files[0]; // accessing file
+        // console.log("Old File");
+        // console.log(file);
+        
+        let regEx = /(?:\.([^.]+))?$/;
+        const {lastModified, lastModifiedDate, name, size, type, webkitRelativePath} = file;
+        let newFileName = Math.random().toString(36).substring(2) + "." + regEx.exec(name)[1];
+
+        // https://stackoverflow.com/questions/21720390/how-to-change-name-of-file-in-javascript-from-input-file
+        const newFile = new File ([file], newFileName, {
+            lastModified: lastModified,
+            lastModifiedDate: lastModifiedDate,
+            name: Math.random().toString(36).substring(2) + "." + regEx.exec(name)[1],
+            size: size,
+            type: type,
+            webkitRelativePath: webkitRelativePath
+        });
+
+        // console.log("New File");
+        // console.log(newFile);
+        setFile(newFile); // storing file
+        setPhotoUrl(`http://localhost:3000/${newFile.name}`);
+    }
+
+    const uploadFile = () => {
+        const formData = new FormData();   
+        // console.log(`photourl variable: ${photourl}`)
+        formData.append('file', file); // appending file
+        axios.post('http://localhost:3000/upload', formData)
+        .then(res => {
+            console.log(res);
+            getFile({ name: res.data.name, path: 'http://localhost:3000' + res.data.path })
+        })
+        .catch(err => console.log(err))}
 
     return ( 
         <>
             <h3>Submit your Pooch!</h3>
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
-                    <Label htmlFor="dogname"/>Name
-                    <Input name="Name" value={dogname} onChange={(e) => setDogName(e.target.value)} onClick={clearDog}/>
+                    <Label htmlFor="dogname">Dog's Name</Label>
+                    <Input name="Name" placeholder="Spot" value={dogname} onChange={(e) => setDogName(e.target.value)} />
                 </FormGroup>
                 <FormGroup>
-                    <Label htmlFor="breed"/>
-                    <Input name="breed" value={breed} onChange={(e) => setBreed(e.target.value)} onClick={clearBreed}/>
+                    <Label htmlFor="breed">Breed</Label>
+                    <Input name="breed" placeholder="Poodle" value={breed} onChange={(e) => setBreed(e.target.value)} />
                     </FormGroup>
                 <FormGroup>
+                    <Label htmlFor="gender">Gender</Label>
                     <Input type="select" name="Gender" value={gender} onChange={(e) => setGender (e.target.value)}>
                     <option></option>
                     <option value="Male">Male</option>
@@ -77,20 +96,22 @@ const PetCreate = (props) => {
                     </Input>
                 </FormGroup>
                 <FormGroup>
-                    <Label htmlFor="citylocation"/>
-                    <Input name="City" value={citylocation} onChange={(e) => setCityLocation(e.target.value)} onClick={clearCity}/>
+                    <Label htmlFor="citylocation">City</Label>
+                    <Input name="City" placeholder="Anytown" value={citylocation} onChange={(e) => setCityLocation(e.target.value)} />
                 </FormGroup>
                 <FormGroup>
-                <Label htmlFor="statelocation"/>
-                    <Input name="State" value={statelocation} onChange={(e) => setStateLocation(e.target.value)} onClick={clearState}/>
+                <Label htmlFor="statelocation">State</Label>
+                    <Input name="State" placeholder="State" value={statelocation} onChange={(e) => setStateLocation(e.target.value)} />
                 </FormGroup>
                 <FormGroup>
-                <Label htmlFor="description"/>
-                    <Input name="Description" value={description} onChange={(e) => setDescription(e.target.value)} onClick={clearDescription}/>
+                <Label htmlFor="description">Description</Label>
+                    <Input name="Description" placeholder="Tell us about your dog!" value={description} onChange={(e) => setDescription(e.target.value)} />
                 </FormGroup>
                 <FormGroup>
-                <Label htmlFor="photourl"/>
-                    <Input name="Photo of Pet (URL)" value={photourl} onChange={(e) => setPhotoUrl(e.target.value)} onClick={clearPhoto}/>
+                <Label htmlFor="photourl">Select a photo:</Label>
+                    {/* <Input name="Photo of Pet (URL)" value={photourl} onChange={(e) => setPhotoUrl(e.target.value)} onClick={clearPhoto}/> */}
+                    {/* <Input type="file" id="petphoto" ref={el} onChange={handleChange}/> */}
+                    <Input type="file" id="photopicker" accept="image/*" onChange={fileInputChange} key={fileInputKey} />
                 </FormGroup>
                 <Button type="submit">Click to Submit</Button>
             </Form>

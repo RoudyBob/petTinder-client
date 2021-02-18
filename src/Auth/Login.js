@@ -51,10 +51,10 @@ const handleSubmit = (event) => {
             <br />
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
-                    <Input onChange={(e) => setUsername(e.target.value)} name="email" value={username} placeholder="email" style={inputBorder}/>
+                    <Input type="email" onChange={(e) => setUsername(e.target.value)} name="email" value={username} placeholder="email" style={inputBorder}/>
                 </FormGroup>
                 <FormGroup>
-                    <Input onChange={(e) => setPassword(e.target.value)} name="password" value={password} placeholder="password" style={inputBorder}/>
+                    <Input type="password" onChange={(e) => setPassword(e.target.value)} name="password" value={password} placeholder="password" style={inputBorder}/>
                 </FormGroup>
                 <br/>
                 <br />
