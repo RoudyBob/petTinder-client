@@ -57,7 +57,7 @@ const PetTable = (props) => {
                     <td>{pet.breed}</td>
                     <td>{pet.gender}</td>
                     <td>{pet.citylocation}, {pet.statelocation}</td>
-                    <td>{pet.photourl}</td>
+                    <td><img src={pet.photourl} width="100px"/></td>
                     <td>{pet.description}</td>
                     <td>
                         <Button onClick={() => {props.editPet(pet); props.updateOn()}} style={updateButton}>Update</Button>
