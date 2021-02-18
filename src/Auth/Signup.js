@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import {Form, FormGroup, Label, Input, Button, Container} from 'reactstrap';
 
 const Signup = (props) => {
 const [username, setUsername] = useState('');
 const [password, setPassword] = useState('');
 const [firstname, setFirstName] = useState('');
 const [lastname, setLastName] = useState('');
+const [emailErr, setEmailErr] = useState(false);
+const [passwordErr, setPasswordErr] = useState(false);
 
 const heading = {
     fontSize: "26px",
@@ -30,33 +32,59 @@ const buttonColor = {
     border: "none"
 }
 
+    const divStyle = {
+        width: '350px',
+        height: '490px',
+        marginTop: '100px',
+        backgroundColor: "white",
+        border: '2px solid lightgrey',
+        borderRadius: '10px',
+        fontFamily: 'Arial',
+      };
+
+
 const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("http://localhost:3000/user/signup", {
-        method: 'POST',
-        body: JSON.stringify({username: username, password: password, firstname: firstname, lastname: lastname}),
-        headers: new Headers({
-            'Content-Type': 'application/json'
+    setEmailErr(false);
+    setPasswordErr(false);
+    let emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(username)
+    if (emailRegex && password.length >= 5) {
+        console.log('Creating User')
+        fetch("http://localhost:3000/user/signup", {
+            method: 'POST',
+            body: JSON.stringify({username: username, password: password, firstname: firstname, lastname: lastname}),
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        }).then(
+            (response) => response.json()
+        ).then((data) => {
+            props.updateToken(data.sessionToken)
         })
-    }).then(
-        (response) => response.json()
-    ).then((data) => {
-        props.updateToken(data.sessionToken)
-    })
+    } else {
+        if (!emailRegex) {
+            setEmailErr(true);
+        }
+        if (password.length < 5) {
+            setPasswordErr(true)
+        }
+    }
 }
 
     return ( 
-        <div>
+        <Container style={divStyle}>
             <center><h1 style={heading}>find your pet's
                 <br />
                 <span style={spanStyle}>pawfect</span> match
             </h1></center>
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
-                    <Input onChange={(e) => setUsername(e.target.value)} name="username" value={username} placeholder="email" style={inputBorder}/>
+                    <Input type="email" onChange={(e) => setUsername(e.target.value)} name="username" value={username} placeholder="email" style={inputBorder}/>
+                    {emailErr ? <p>Please enter a valid email address.</p> : <></>}
                 </FormGroup>
                 <FormGroup>
-                    <Input onChange={(e) => setPassword(e.target.value)} name="password" value={password} placeholder="password" style={inputBorder}/>
+                    <Input type="password" onChange={(e) => setPassword(e.target.value)} name="password" value={password} placeholder="password" style={inputBorder}/>
+                    {passwordErr ? <p>Password must be 5 characters or greater.</p> : <></>}
                 </FormGroup>
                 <FormGroup>
                     <Input onChange={(e) => setFirstName(e.target.value)} name="firstname" value={firstname} placeholder="first name" style={inputBorder}/>
@@ -66,7 +94,7 @@ const handleSubmit = (event) => {
                 </FormGroup>
                 <center><Button type="submit" style={buttonColor}>Sign Up</Button></center>
             </Form>
-        </div>
+        </Container>
      );
 }
  

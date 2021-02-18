@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PetIndex from '../Pets/PetIndex';
 import {
     Navbar,
     NavbarBrand,
@@ -8,6 +9,12 @@ import {
     NavItem,
     Button
 } from 'reactstrap';
+import {
+    Route,
+    Link,
+    Switch,
+    BrowserRouter
+} from 'react-router-dom';
 
 const Navigation = (props) => {
 
@@ -34,16 +41,25 @@ const Navigation = (props) => {
 
     const buttonColor = {
         backgroundColor: "hotpink",
-        border: "none"
+        border: "none",
+        letterSpacing: "-1px"
     }
 
+    const navButton = {
+        padding: "10px"
+    }
+
+
     return ( 
-        <Navbar color="faded" light expand="md" style={navColor}>
-            <NavbarBrand href="/" style={tinderHeader}>pettinder.</NavbarBrand>
+        <Navbar color="faded" light expand="md" style={navColor} fixed="top">
+            <NavbarBrand href="/" style={tinderHeader}><img src="https://i.imgur.com/VvsuXLH.png"/>pettinder.</NavbarBrand>
             <br /><p style={headerSubtitle}>where dog breeders meet.</p>
                 <Nav className="ml-auto" navbar>
-                    <NavItem>
-                        {localStorage.getItem('token') ? <Button onClick={props.clickLogout} style={buttonColor}>Logout</Button> : <></>}
+                    <NavItem style={navButton}>
+                        {localStorage.getItem('token') ? <Button href="/mypets" style={buttonColor}>my pets</Button> : <></>}
+                    </NavItem>
+                    <NavItem style={navButton}>
+                        {localStorage.getItem('token') ? <Button onClick={props.clickLogout} style={buttonColor}>logout</Button> : <></>}
                     </NavItem>
                 </Nav>
         </Navbar>
