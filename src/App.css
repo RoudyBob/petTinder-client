@@ -50,6 +50,8 @@
   max-width: 750px;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
+  top: 100px;
 }
 
 .carousel-inner {
@@ -81,8 +83,9 @@
  .pet-carousel {
    color: white;
    position: relative;
-   top: -200px;
+   top: 0px;
    left: 20px;
+   text-shadow: 2px 2px black;
  }
 
  .carousel-indicators {

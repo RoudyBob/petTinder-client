@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption, Form, Button} from 'reactstrap';
-
+import {Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption} from 'reactstrap';
 
 const PetSwipe = (props) => {
     const [allPets, setAllPets] = useState([]);
@@ -29,7 +28,6 @@ const PetSwipe = (props) => {
   } 
 
     const fetchPets = () => {
-        console.log('hi there');
         fetch('http://localhost:3000/pet', {
             method: 'GET',
             headers: new Headers ({
@@ -43,30 +41,31 @@ const PetSwipe = (props) => {
 }
 
 
-
 const slides = () => {
     return allPets.map((pet) => {
+        console.log(pet.updatedAt);
+        let updatedAt = new Date(pet.updatedAt).toLocaleDateString();
     return (
-        <CarouselItem key={pet.id}>
+        <CarouselItem onExiting={() => setAnimating(true)}
+        onExited={() => setAnimating(false)} key={pet.id}>
             
-            <img src="https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png" style={{height: 400 + 'px', width: 'auto'}}/>
+            <img src={pet.photourl} style={{height: 400 + 'px', width: 'auto'}}/>
             
             <CarouselCaption captionText={pet.dogname} captionHeader={pet.breed} />  
             <div className="pet-carousel">
                 {pet.gender}<br></br>
                 {pet.citylocation}<br></br>
                 {pet.statelocation}<br></br>
-                {pet.description}
+                {pet.description}<br></br>
+                {updatedAt}
             </div>   
         </CarouselItem>
-        
     );
 })};
 
-
     return ( 
         
-        <Carousel activeIndex={activeIndex} next={next} previous={previous}>
+        <Carousel interval={null} activeIndex={activeIndex} next={next} previous={previous}>
             <CarouselIndicators items={allPets} activeIndex={activeIndex} onClickHandler={goToIndex}/>
             {slides()}
             <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
@@ -77,3 +76,4 @@ const slides = () => {
 }
  
 export default PetSwipe;
+
