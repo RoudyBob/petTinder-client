@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption, Input, Form, Button} from 'reactstrap';
+import {Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption, Input, Form, Button, ModalBody, Modal} from 'reactstrap';
+import PetEmail from '../Pets/PetEmail';
 
 const PetSwipe = (props) => {
     const [allPets, setAllPets] = useState([]);
@@ -7,10 +8,16 @@ const PetSwipe = (props) => {
     const [animating, setAnimating] = useState(false);
     const [searchGender, setSearchGender] = useState('Both');
     const [searchCity, setSearchCity] = useState('');
+    const [owner, setOwner] = useState([]);
+    const [owners, setOwners] = useState([]);
+    const [modal, setModal] = useState(false);
+
+    const toggle = () => setModal(!modal);
 
     useEffect(() => {
         fetchPets(searchGender,searchCity,'');
-    },[]);
+        fetchOwners();
+    }, []);
 
   const next = () => {
     const nextIndex = activeIndex === allPets.length - 1 ? 0 : activeIndex + 1;
@@ -90,6 +97,54 @@ const PetSwipe = (props) => {
         fetchPets(gender, '','');
 
     }
+    
+    const fetchOwners = () => {
+    let url = 'http://localhost:3000/user/owners';
+    console.log(url);
+    fetch(url, {
+           method: 'GET',
+           headers: new Headers ({
+           'Content-Type': 'application/json',
+        })
+     }).then((res) => res.json())
+     .then((petOwners) => {
+        setOwners(petOwners)
+        console.log(petOwners)
+        })
+        }
+
+    const slides = () => {
+    return allPets.map((pet) => {
+        console.log(pet.updatedAt);
+        let updatedAt = new Date(pet.updatedAt).toLocaleDateString();
+        let ownerid = (pet.ownerid);
+        let obj = owners.find(obj => obj.id == ownerid);
+        console.log(obj);
+    return (
+        <CarouselItem onExiting={() => setAnimating(true)}
+        onExited={() => setAnimating(false)} key={pet.id}>
+            
+            <center><img src={pet.photourl} style={{height: 400 + 'px', width: 'auto', padding: 30 + 'px'}}/></center>
+            <div className="pet-carousel">
+            <div className="pet-header">{pet.dogname} | {pet.breed} | {pet.gender}</div><br/>
+                <div className="citystate">{pet.citylocation}, {pet.statelocation}</div><br></br>
+                ❝{pet.description}❞<br></br><br></br>
+                
+                <br></br>
+                <div className="emailheart"><Button onClick={toggle}><img src="https://i.imgur.com/6OeNu0a.png"/></Button></div>
+                  
+                <Modal isOpen={modal} toggle={toggle}>
+                <ModalBody>
+                    <PetEmail owner={obj}/>
+                </ModalBody>
+                </Modal>
+                  
+                <div className="bottom-text">Last Updated: {updatedAt}</div>
+        
+            </div>   
+        </CarouselItem>
+    );
+})};
 
     return ( 
         
@@ -124,8 +179,8 @@ const PetSwipe = (props) => {
                 <button type="button" onClick={clearFilters}>Clear Search Filters</button>
             </div>
         </div>
-        
      ); 
 }
  
 export default PetSwipe;
+

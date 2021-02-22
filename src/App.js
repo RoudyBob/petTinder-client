@@ -8,6 +8,7 @@ import PetIndex from './components/Pets/PetIndex';
 import PetSwipe from './components/Homepage/PetSwipe';
 import './myStyles.css'
 import Signup from './Auth/Signup';
+import PetEmail from './components/Pets/PetEmail';
 
 function App() {
 
@@ -39,6 +40,10 @@ const petSwipeView = () => {
   return (sessionToken === localStorage.getItem('token') ? <PetSwipe token={sessionToken} /> : <Auth updateToken={updateToken} />)
 };
 
+const petEmailView = () => {
+  return (sessionToken === localStorage.getItem('token') ? <PetEmail token={sessionToken} /> : <Auth updateToken={updateToken} />)
+};
+
 const signupView = () => {
   return (
     <Signup />
@@ -53,6 +58,7 @@ const signupView = () => {
           <Route exact path="/" component={petSwipeView} />
           <Route path="/mypets" component={petIndexView} />
           <Route path="/signup" component={signupView} />
+          <Route path="/email" component={petEmailView} />
         </Switch>
       </BrowserRouter>
     </div>

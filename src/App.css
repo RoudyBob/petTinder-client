@@ -50,11 +50,14 @@
   max-width: 750px;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
+  top: 100px;
 }
 
 .carousel-inner {
   max-width: 550px;
   margin: auto;
+  background-color: white;
 }
 
 
@@ -79,10 +82,14 @@
  }
 
  .pet-carousel {
-   color: white;
+   color: hotpink;
    position: relative;
-   top: -200px;
+   top: 0px;
    left: 20px;
+   text-align: center;
+   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   font-weight: bold;
+   font-size: 26px;
  }
 
  .carousel-indicators {
@@ -142,4 +149,29 @@
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 5px;
+
+.bottom-text {
+  text-align: right;
+  padding-right: 40px;
+  font-size: 12px;
+  font-weight: bold;
+  color: grey;
+}
+
+.pet-header{
+  font-size: 20px;
+  font-weight: bold;
+  color: coral;
+  letter-spacing: -.5px;
+}
+
+.citystate{
+  margin-top: -30px;
+  font-weight: 400;
+  color: coral;
+}
+
+.emailheart {
+  display: flex;
+  justify-content: left;
 }
