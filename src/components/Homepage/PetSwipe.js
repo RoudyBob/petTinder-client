@@ -77,22 +77,24 @@ const slides = () => {
         <CarouselItem onExiting={() => setAnimating(true)}
         onExited={() => setAnimating(false)} key={pet.id}>
             
-            <img src={pet.photourl} style={{height: 400 + 'px', width: 'auto'}}/>
-            
-            <CarouselCaption captionText={pet.dogname} captionHeader={pet.breed} />  
+            <center><img src={pet.photourl} style={{height: 400 + 'px', width: 'auto', padding: 30 + 'px'}}/></center>
             <div className="pet-carousel">
-                {pet.gender}<br></br>
-                {pet.citylocation}<br></br>
-                {pet.statelocation}<br></br>
-                {pet.description}<br></br>
-                {updatedAt}
-            </div>  
-            <Button onClick={toggle}>Email Owner</Button>
-            <Modal isOpen={modal} toggle={toggle}>
+            <div className="pet-header">{pet.dogname} | {pet.breed} | {pet.gender}</div><br/>
+                <div className="citystate">{pet.citylocation}, {pet.statelocation}</div><br></br>
+                ❝{pet.description}❞<br></br><br></br>
+                
+                <br></br>
+                <div className="emailheart"><Button onClick={toggle}><img src="https://i.imgur.com/6OeNu0a.png"/></Button></div>
+                  
+                <Modal isOpen={modal} toggle={toggle}>
                 <ModalBody>
                     <PetEmail owner={obj}/>
                 </ModalBody>
-            </Modal>
+                </Modal>
+                  
+                <div className="bottom-text">Last Updated: {updatedAt}</div>
+        
+            </div>   
         </CarouselItem>
     );
 })};
