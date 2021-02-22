@@ -59,9 +59,6 @@ const Navigation = (props) => {
                         {localStorage.getItem('token') ? <Button href="/mypets" style={buttonColor}>my pets</Button> : <></>}
                     </NavItem>
                     <NavItem style={navButton}>
-                        {localStorage.getItem('token') ? <Button href="/email" style={buttonColor}>email</Button> : <></>}
-                    </NavItem>
-                    <NavItem style={navButton}>
                         {localStorage.getItem('token') ? <Button onClick={props.clickLogout} style={buttonColor}>logout</Button> : <></>}
                     </NavItem>
                 </Nav>

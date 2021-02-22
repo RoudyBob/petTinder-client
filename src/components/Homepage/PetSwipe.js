@@ -56,25 +56,6 @@ const PetSwipe = (props) => {
         .then((petAll) => { setAllPets(petAll) })
     }
 
-    const slides = () => {
-        return allPets.map((pet) => {
-        return (
-            <CarouselItem key={pet.id}>
-                
-                <img src="https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png" style={{height: 400 + 'px', width: 'auto'}}/>
-                
-                <CarouselCaption captionText={pet.dogname} captionHeader={pet.breed} />  
-                <div className="pet-carousel">
-                    {pet.gender}<br></br>
-                    {pet.citylocation}<br></br>
-                    {pet.statelocation}<br></br>
-                    {pet.description}
-                </div>   
-            </CarouselItem>
-            
-        );
-    })};
-
     const genderSelection = (e) => {
         let gender = e.target.value;
         console.log(`Looking for all ${gender} dogs.`);
@@ -114,43 +95,45 @@ const PetSwipe = (props) => {
         }
 
     const slides = () => {
-    return allPets.map((pet) => {
-        console.log(pet.updatedAt);
-        let updatedAt = new Date(pet.updatedAt).toLocaleDateString();
-        let ownerid = (pet.ownerid);
-        let obj = owners.find(obj => obj.id == ownerid);
-        console.log(obj);
-    return (
-        <CarouselItem onExiting={() => setAnimating(true)}
-        onExited={() => setAnimating(false)} key={pet.id}>
-            
-            <center><img src={pet.photourl} style={{height: 400 + 'px', width: 'auto', padding: 30 + 'px'}}/></center>
-            <div className="pet-carousel">
-            <div className="pet-header">{pet.dogname} | {pet.breed} | {pet.gender}</div><br/>
-                <div className="citystate">{pet.citylocation}, {pet.statelocation}</div><br></br>
-                ❝{pet.description}❞<br></br><br></br>
+        return allPets.map((pet) => {
+            console.log(pet.updatedAt);
+            let updatedAt = new Date(pet.updatedAt).toLocaleDateString();
+            let ownerid = (pet.ownerid);
+            let obj = owners.find(obj => obj.id == ownerid);
+            console.log(obj);
+    
+            return (
+                <CarouselItem onExiting={() => setAnimating(true)} onExited={() => setAnimating(false)} key={pet.id}>
+                    <div>
+                        <center><img src={pet.photourl} style={{height: 400 + 'px', width: 'auto', padding: 30 + 'px'}}/></center>
+                        <div className="pet-carousel">
+                            <div className="pet-header">{pet.dogname} | {pet.breed} | {pet.gender}</div><br/>
+                            <div className="citystate">{pet.citylocation}, {pet.statelocation}</div>
+                            <div>
+                                <br></br>❝{pet.description}❞<br></br><br></br>
+                            </div>
+                            
+                        <div className="bottom-text">Last Updated: {updatedAt}</div>
+                        
+                        </div> 
+                            <div className="emailheart"><Button onClick={toggle}><img src="https://i.imgur.com/6OeNu0a.png"/></Button></div>
+                            <Modal isOpen={modal} toggle={toggle}>
+                                <ModalBody>
+                                    <PetEmail owner={obj}/>
+                                </ModalBody>
+                            </Modal>
+                    </div> 
+                </CarouselItem>
                 
-                <br></br>
-                <div className="emailheart"><Button onClick={toggle}><img src="https://i.imgur.com/6OeNu0a.png"/></Button></div>
-                  
-                <Modal isOpen={modal} toggle={toggle}>
-                <ModalBody>
-                    <PetEmail owner={obj}/>
-                </ModalBody>
-                </Modal>
-                  
-                <div className="bottom-text">Last Updated: {updatedAt}</div>
-        
-            </div>   
-        </CarouselItem>
-    );
-})};
+            );
+        })
+    };
 
     return ( 
         
         <div>
             <Carousel interval={false} activeIndex={activeIndex} next={next} previous={previous}>
-                <CarouselIndicators items={allPets} activeIndex={activeIndex} onClickHandler={goToIndex}/>
+                {/* <CarouselIndicators items={allPets} activeIndex={activeIndex} onClickHandler={goToIndex}/> */}
                 {slides()}
                 <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
                 <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
