@@ -100,15 +100,15 @@ const PetCreate = (props) => {
                 <FormGroup>
                     <center><h3 style={titleStyle}>submit your pooch!</h3></center>
                     <Label htmlFor="dogname">Dog's Name</Label>
-                    <Input name="Name" placeholder="Spot" value={dogname} onChange={(e) => setDogName(e.target.value)} />
+                    <Input name="Name" placeholder="Spot" autocomplete="off" value={dogname} onChange={(e) => setDogName(e.target.value)} />
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="breed">Breed</Label>
-                    <Input name="breed" placeholder="Poodle" value={breed} onChange={(e) => setBreed(e.target.value)} />
+                    <Input name="breed" placeholder="Poodle" autocomplete="off" value={breed} onChange={(e) => setBreed(e.target.value)} />
                     </FormGroup>
                 <FormGroup>
                     <Label htmlFor="gender">Gender</Label>
-                    <Input type="select" name="Gender" value={gender} onChange={(e) => setGender (e.target.value)}>
+                    <Input type="select" name="Gender" autocomplete="off" value={gender} onChange={(e) => setGender (e.target.value)}>
                     <option></option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -116,15 +116,15 @@ const PetCreate = (props) => {
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="citylocation">City</Label>
-                    <Input name="City" placeholder="Anytown" value={citylocation} onChange={(e) => setCityLocation(e.target.value)} />
+                    <Input name="City" placeholder="Anytown" autocomplete="off" value={citylocation} onChange={(e) => setCityLocation(e.target.value)} />
                 </FormGroup>
                 <FormGroup>
-                <Label htmlFor="statelocation">State</Label>
-                    <Input name="State" placeholder="State" value={statelocation} onChange={(e) => setStateLocation(e.target.value)} />
+                <Label htmlFor="statelocation">State (2-letter abbr)</Label>
+                    <Input name="state" pattern="|AL|AK|AS|AZ|AR|CA|CO|CT|DE|DC|FM|FL|GA|GU|HI|ID|IL|IN|IA|KS|KY|LA|ME|MH|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|MP|OH|OK|OR|PW|PA|PR|RI|SC|SD|TN|TX|UT|VT|VI|VA|WA|WV|WI|WY|" autocomplete="off" placeholder="State" value={statelocation} onChange={(e) => setStateLocation(e.target.value)} />
                 </FormGroup>
                 <FormGroup>
                 <Label htmlFor="description">Description</Label>
-                    <Input name="Description" placeholder="Tell us about your dog!" value={description} onChange={(e) => setDescription(e.target.value)} />
+                    <Input name="Description" autocomplete="off" placeholder="Tell us about your dog!" value={description} onChange={(e) => setDescription(e.target.value)} />
                 </FormGroup>
                 <FormGroup>
                 <Label htmlFor="photourl">Select a photo:</Label>

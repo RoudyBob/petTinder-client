@@ -97,6 +97,59 @@
   top: 370px;
 }
 
+.searchContainer {
+  padding: 10px;
+  margin: auto;
+  margin-top: -50px;
+  display: flex;
+  background: linear-gradient(to right, hotpink, coral);
+  width: 500px;
+  color: white;
+  align-items: flex-start;
+}
+
+.genderFilter {
+  flex: 1 0 auto;
+}
+
+.genderFilter input {
+  cursor: pointer;
+}
+
+.cityFilter {
+  flex: 1 0 auto;
+}
+
+.cityFilter input {
+  width: 75%;
+  outline: none;
+}
+
+.cityFilter button {
+  margin-left: 5px;
+  background-color: hotpink;
+  border: none;
+  letter-spacing: -1px;
+  color: white;
+}
+
+.clearFilter {
+  margin: auto;
+  text-align: center;
+  
+}
+
+.clearFilter button {
+  margin-top: 10px;
+  background-color: hotpink;
+  border: none;
+  letter-spacing: -1px;
+  color: white;
+  padding-top: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 5px;
+
 .bottom-text {
   text-align: right;
   padding-right: 40px;
