@@ -115,6 +115,7 @@ const PetSwipe = (props) => {
                                 <br></br>❝{pet.description}❞<br></br><br></br>
                             </div>
                             <div id="pet-email" style={{display: "none"}}>{pet.ownerid}</div>
+                            <div id="pet-id" style={{display: "none"}}>{pet.id}</div>
                             
                         
                         
