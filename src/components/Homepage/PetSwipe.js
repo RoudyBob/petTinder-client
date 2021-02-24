@@ -3,6 +3,7 @@ import {Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCap
 import PetEmail from '../Pets/PetEmail';
 
 const PetSwipe = (props) => {
+
     const [allPets, setAllPets] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
     const [animating, setAnimating] = useState(false);
@@ -11,6 +12,7 @@ const PetSwipe = (props) => {
     const [owner, setOwner] = useState([]);
     const [owners, setOwners] = useState([]);
     const [modal, setModal] = useState(false);
+    const [userToken, setUserToken] = useState(props.token);
 
     const toggle = () => setModal(!modal);
 
@@ -19,19 +21,19 @@ const PetSwipe = (props) => {
         fetchOwners();
     }, []);
 
-  const next = () => {
-    const nextIndex = activeIndex === allPets.length - 1 ? 0 : activeIndex + 1;
-    setActiveIndex(nextIndex);
-  }
+    const next = () => {
+        const nextIndex = activeIndex === allPets.length - 1 ? 0 : activeIndex + 1;
+        setActiveIndex(nextIndex);
+    }
 
-  const previous = () => {
-    const nextIndex = activeIndex === 0 ? allPets.length - 1 : activeIndex - 1;
-    setActiveIndex(nextIndex);
-  }
+    const previous = () => {
+        const nextIndex = activeIndex === 0 ? allPets.length - 1 : activeIndex - 1;
+        setActiveIndex(nextIndex);
+    }
 
-  const goToIndex = (newIndex) => {
-    setActiveIndex(newIndex);
-  } 
+    const goToIndex = (newIndex) => {
+        setActiveIndex(newIndex);
+    } 
 
     const fetchPets = (gender, city, state) => {
         let url = '';
@@ -87,12 +89,13 @@ const PetSwipe = (props) => {
            headers: new Headers ({
            'Content-Type': 'application/json',
         })
-     }).then((res) => res.json())
+     })
+     .then((res) => res.json())
      .then((petOwners) => {
         setOwners(petOwners)
         console.log(petOwners)
         })
-        }
+    }
 
     const slides = () => {
         return allPets.map((pet) => {
@@ -119,7 +122,7 @@ const PetSwipe = (props) => {
                             <div className="emailheart"><Button onClick={toggle}><img src="https://i.imgur.com/6OeNu0a.png"/></Button></div>
                             <Modal isOpen={modal} toggle={toggle}>
                                 <ModalBody>
-                                    <PetEmail owner={obj}/>
+                                    <PetEmail token={userToken} owner={obj}/>
                                 </ModalBody>
                             </Modal>
                     </div> 
