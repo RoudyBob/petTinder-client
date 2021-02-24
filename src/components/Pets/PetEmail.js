@@ -1,23 +1,47 @@
-import React, { useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import emailjs from 'emailjs-com';
 import {Form} from 'reactstrap';
 
-export default function PetEmail() {
-  const ownerid = document.getElementById("pet-email").innerHTML;
-  console.log(`this is the owner id ${ownerid}`);
-  const senderToken = localStorage.getItem('token');
-  const sender_wholename = "Fred Savage";
-  const from_email = "susan@knowledgedna.com";
-  const subject = `Pettinder Message from ${sender_wholename}`;
+const PetEmail = (props) => {
 
-  const firstname = owner.owner.firstname;
-  const lastname = owner.owner.lastname;
-  const wholename = firstname + ' ' + lastname;
+  const ownerid = document.getElementById("pet-email").innerHTML;
+  const [sendFromEmail, setSendFromEmail] = useState('');
+  const [userToken, setUserToken] = useState(props.token);
+  const [currentUser, setCurrentUser] = useState('');
+  const [owner, setOwner] = useState(props.owner);
+  const [firstname, setfirstname] = useState('');
+  const [lastname, setlastname] = useState('');
+  const [wholename, setwholename] = useState('');
+  
+  const sender_wholename = currentUser.firstname + ' ' + currentUser.lastname;
+  const from_email = currentUser.username;
+  const subject = `Pettinder Message from ${sender_wholename}`;
   const to_email = "susanwulf@earthlink.net";
+
+  const getCurrentUser = () => {
+    fetch ('http://localhost:3000/user/current', {
+      method: 'GET',
+      headers: new Headers ({
+        'Content-Type': 'application-json',
+        'Authorization': userToken
+      })
+    })
+      .then((response) => response.json())
+      .then((user) => { 
+        console.log(`Logged In User: ${user.username}`)
+        setCurrentUser(user);
+      })
+  };
+
+  useEffect(() => {
+    getCurrentUser();
+    setfirstname(owner.firstname);
+    setlastname(owner.lastname);
+    setwholename(firstname + ' ' + lastname);
+  }, []);
 
   function sendEmail(e) {
     e.preventDefault();    //This is important, i'm not sure why, but the email won't send without it
-
     emailjs.sendForm('service_vydnlz7', 'template_apq5fn7', e.target, 'user_j7jbBi9i8Kzp0HMHzjPsF')
       .then((result) => {
           window.location.reload()  //This is if you still want the page to reload (since e.preventDefault() cancelled that behavior) 
@@ -25,7 +49,7 @@ export default function PetEmail() {
           console.log(error.text);
       });
   }
-  console.log('hi again');
+
   return (
     <form onSubmit={sendEmail}>
       <input type="hidden" name="firstname" value={firstname}/>
@@ -51,3 +75,5 @@ export default function PetEmail() {
     </form>
   );
 }
+
+export default PetEmail;
