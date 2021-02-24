@@ -5,18 +5,33 @@ import {Form} from 'reactstrap';
 const PetEmail = (props) => {
 
   const ownerid = document.getElementById("pet-email").innerHTML;
+  const petid = document.getElementById("pet-id").innerHTML;
+  
   const [sendFromEmail, setSendFromEmail] = useState('');
   const [userToken, setUserToken] = useState(props.token);
   const [currentUser, setCurrentUser] = useState('');
   const [owner, setOwner] = useState(props.owner);
-  const [firstname, setfirstname] = useState('');
-  const [lastname, setlastname] = useState('');
-  const [wholename, setwholename] = useState('');
-  
-  const sender_wholename = currentUser.firstname + ' ' + currentUser.lastname;
-  const from_email = currentUser.username;
-  const subject = `Pettinder Message from ${sender_wholename}`;
-  const to_email = "susanwulf@earthlink.net";
+  const [ownerFirstName, setOwnerFirstName] = useState('');
+  const [ownerUserName, setOwnerUserName] = useState('');
+  const [ownerLastName, setOwnerLastName] = useState('');
+
+  const getOwner = () => {
+    let url = `http://localhost:3000/user/byid/${ownerid}`
+    fetch(url, {
+      method: 'GET',
+      headers: new Headers ({
+        'Content-Type': 'application-json'
+      })
+    })
+    .then((response) => response.json())
+    .then((owner) => {
+      // console.log(`Pet Owner username: ${owner.username}`)
+      setOwner(owner);
+      setOwnerFirstName(owner.firstname);
+      setOwnerLastName(owner.lastname);
+      setOwnerUserName(owner.username);
+    })
+  }
 
   const getCurrentUser = () => {
     fetch ('http://localhost:3000/user/current', {
@@ -28,16 +43,14 @@ const PetEmail = (props) => {
     })
       .then((response) => response.json())
       .then((user) => { 
-        console.log(`Logged In User: ${user.username}`)
+        // console.log(`Logged In User: ${user.username}`)
         setCurrentUser(user);
       })
   };
 
   useEffect(() => {
     getCurrentUser();
-    setfirstname(owner.firstname);
-    setlastname(owner.lastname);
-    setwholename(firstname + ' ' + lastname);
+    getOwner();
   }, []);
 
   function sendEmail(e) {
@@ -52,25 +65,25 @@ const PetEmail = (props) => {
 
   return (
     <form onSubmit={sendEmail}>
-      <input type="hidden" name="firstname" value={firstname}/>
-      <input type="hidden" name="sender_wholename" value={sender_wholename}/>
-      <input type="hidden" name="to_email" value={to_email}/>
-      <input type="hidden" name="from_email" value={from_email}/>
+      <input type="hidden" name="firstname" value={ownerFirstName}/>
+      <input type="hidden" name="sender_wholename" value={`${currentUser.firstname} ${currentUser.lastname}`}/>
+      <input type="hidden" name="to_email" value={ownerUserName}/>
+      <input type="hidden" name="from_email" value={currentUser.username}/>
 
       <table>
         <tr>
           <td><label>Owner Name:&nbsp;</label></td>
-          <td><input type="text" name="wholename" value={wholename}/></td>
+          <td><input type="text" name="wholename" value={`${ownerFirstName} ${ownerLastName}`}/></td>
         </tr> 
         <tr>
           <td><label>Subject:&nbsp;</label></td>
-          <td><input type="text" name="subject" value={subject}/></td>
+          <td><input type="text" name="subject" value={`Pettinder Message from ${currentUser.firstname} ${currentUser.lastname}`}/></td>
         </tr> 
         <tr>
           <td><label>Message:&nbsp;</label></td>
           <td><textarea name="message" /></td>
         </tr>
-      <input type="submit" value="Send" />
+        <input type="submit" value="Send" />
       </table>
     </form>
   );
