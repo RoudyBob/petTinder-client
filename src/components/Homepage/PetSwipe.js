@@ -103,7 +103,6 @@ const PetSwipe = (props) => {
             let updatedAt = new Date(pet.updatedAt).toLocaleDateString();
             let ownerid = (pet.ownerid);
             let obj = owners.find(obj => obj.id == ownerid);
-            console.log(obj);
     
             return (
                 <CarouselItem onExiting={() => setAnimating(true)} onExited={() => setAnimating(false)} key={pet.id}>
@@ -115,6 +114,7 @@ const PetSwipe = (props) => {
                             <div>
                                 <br></br>❝{pet.description}❞<br></br><br></br>
                             </div>
+                            <div id="pet-email" style={{display: "none"}}>{pet.ownerid}</div>
                             
                         <div className="bottom-text">Last Updated: {updatedAt}</div>
                         
@@ -122,7 +122,7 @@ const PetSwipe = (props) => {
                             <div className="emailheart"><Button onClick={toggle}><img src="https://i.imgur.com/6OeNu0a.png"/></Button></div>
                             <Modal isOpen={modal} toggle={toggle}>
                                 <ModalBody>
-                                    <PetEmail token={userToken} owner={obj}/>
+                                    <PetEmail token={userToken} />
                                 </ModalBody>
                             </Modal>
                     </div> 

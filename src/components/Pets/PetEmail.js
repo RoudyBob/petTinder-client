@@ -4,6 +4,7 @@ import {Form} from 'reactstrap';
 
 const PetEmail = (props) => {
 
+  const ownerid = document.getElementById("pet-email").innerHTML;
   const [sendFromEmail, setSendFromEmail] = useState('');
   const [userToken, setUserToken] = useState(props.token);
   const [currentUser, setCurrentUser] = useState('');
@@ -11,6 +12,11 @@ const PetEmail = (props) => {
   const [firstname, setfirstname] = useState('');
   const [lastname, setlastname] = useState('');
   const [wholename, setwholename] = useState('');
+  
+  const sender_wholename = currentUser.firstname + ' ' + currentUser.lastname;
+  const from_email = currentUser.username;
+  const subject = `Pettinder Message from ${sender_wholename}`;
+  const to_email = "susanwulf@earthlink.net";
 
   const getCurrentUser = () => {
     fetch ('http://localhost:3000/user/current', {
@@ -45,21 +51,29 @@ const PetEmail = (props) => {
   }
 
   return (
-    <form onSubmit={sendEmail} style={{position: 'relative', top: 200 + "px"}}>
-      <label>Name</label>
-      <input type="text" name="wholename" value={wholename}/>
-      <label>testemail</label>
-      <input type="text" name="testemail" value="susanwulf@earthlink.net"/>
-      <label>Email</label>
-      <input type="email" name="from_email" />
-      <label>Subject</label>
-      <input type="text" name="subject" />
-      <label>Message</label>
-      <textarea name="html_message" />
+    <form onSubmit={sendEmail}>
+      <input type="hidden" name="firstname" value={firstname}/>
+      <input type="hidden" name="sender_wholename" value={sender_wholename}/>
+      <input type="hidden" name="to_email" value={to_email}/>
+      <input type="hidden" name="from_email" value={from_email}/>
+
+      <table>
+        <tr>
+          <td><label>Owner Name:&nbsp;</label></td>
+          <td><input type="text" name="wholename" value={wholename}/></td>
+        </tr> 
+        <tr>
+          <td><label>Subject:&nbsp;</label></td>
+          <td><input type="text" name="subject" value={subject}/></td>
+        </tr> 
+        <tr>
+          <td><label>Message:&nbsp;</label></td>
+          <td><textarea name="message" /></td>
+        </tr>
       <input type="submit" value="Send" />
+      </table>
     </form>
   );
-  
 }
 
 export default PetEmail;
