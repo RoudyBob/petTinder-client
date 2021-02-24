@@ -113,16 +113,18 @@ const PetSwipe = (props) => {
                                 <br></br>❝{pet.description}❞<br></br><br></br>
                             </div>
                             
-                        <div className="bottom-text">Last Updated: {updatedAt}</div>
+                        
                         
                         </div> 
-                            <div className="emailheart"><Button onClick={toggle}><img src="https://i.imgur.com/6OeNu0a.png"/></Button></div>
+                            <div className="emailheart"><Button onClick={toggle} style={{backgroundColor: "white", border: "none"}}><img src="https://i.imgur.com/6OeNu0a.png"/></Button></div>
+                            <div className="bottom-text">Last Updated: {updatedAt}</div>
                             <Modal isOpen={modal} toggle={toggle}>
                                 <ModalBody>
                                     <PetEmail owner={obj}/>
                                 </ModalBody>
                             </Modal>
                     </div> 
+                    
                 </CarouselItem>
                 
             );
