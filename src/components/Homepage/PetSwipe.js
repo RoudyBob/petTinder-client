@@ -11,6 +11,7 @@ const PetSwipe = (props) => {
     const [owner, setOwner] = useState([]);
     const [owners, setOwners] = useState([]);
     const [modal, setModal] = useState(false);
+    const [userToken, setUserToken] = useState(props.token);
 
     const toggle = () => setModal(!modal);
 
@@ -119,7 +120,7 @@ const PetSwipe = (props) => {
                             <div className="emailheart"><Button onClick={toggle}><img src="https://i.imgur.com/6OeNu0a.png"/></Button></div>
                             <Modal isOpen={modal} toggle={toggle}>
                                 <ModalBody>
-                                    <PetEmail/>
+                                    <PetEmail token={userToken}/>
                                 </ModalBody>
                             </Modal>
                     </div> 

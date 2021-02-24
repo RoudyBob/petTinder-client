@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import emailjs from 'emailjs-com';
 import {Form} from 'reactstrap';
 
-export default function PetEmail() {
+export default function PetEmail(props) {
   const ownerid = document.getElementById("pet-email").innerHTML;
   console.log(`this is the owner id ${ownerid}`);
   const senderToken = localStorage.getItem('token');
