@@ -178,11 +178,64 @@
 
 .modal-body {
   color: hotpink;
-  font-weight: bold;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
 }
 
 .modal-header {
   color: coral;
   font-weight: bold;
   font-size: 30px;
+  text-align: center;
+  margin-left: 180px;
+}
+
+.emailheader {
+  color: coral;
+  text-align: center;
+  padding: 20px;
+}
+
+.edithead {
+  color: coral;
+  text-align: center;
+  padding: 20px;
+}
+
+.submitbutton {
+  background-color: hotpink;
+  color: white;
+  border-style: solid;
+  border-color: rgb(250, 80, 165);
+  border-radius: 3px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  margin-left: 180px;
+}
+
+.submitbutton2 {
+  background-color: hotpink;
+  color: white;
+  border-style: solid;
+  border-color: rgb(250, 80, 165);
+  border-radius: 3px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  margin-left: 120px;
+}
+
+input {
+  border-color: rgb(255, 139, 197);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 4px;
+}
+
+textarea {
+  border-color: rgb(255, 139, 197);
+  border-width: 2px;
+  border-radius: 4px;
+  padding: 10px;
 }

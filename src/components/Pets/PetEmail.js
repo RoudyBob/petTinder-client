@@ -4,8 +4,8 @@ import {Form} from 'reactstrap';
 
 const PetEmail = (props) => {
 
-  const ownerid = document.getElementById("pet-email").innerHTML;
-  const petid = document.getElementById("pet-id").innerHTML;
+  const ownerid = document.querySelector("div.carousel-item.active > div > div.pet-carousel > div#pet-email").innerHTML;
+  const petid = document.querySelector("div.carousel-item.active > div > div.pet-carousel > div#pet-id").innerHTML;
   
   const [sendFromEmail, setSendFromEmail] = useState('');
   const [userToken, setUserToken] = useState(props.token);
@@ -83,7 +83,7 @@ const PetEmail = (props) => {
           <td><label>Message:&nbsp;</label></td>
           <td><textarea name="message" /></td>
         </tr>
-        <input type="submit" value="Send" />
+        <center><div><input type="submit" value="Send" class="submitbutton"/></div></center>
       </table>
     </form>
   );

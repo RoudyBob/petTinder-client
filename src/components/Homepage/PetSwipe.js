@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import {Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption, Input, Form, Button, ModalBody, Modal} from 'reactstrap';
+import {Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption, Input, Form, Button, ModalBody, Modal, ModalHeader} from 'reactstrap';
 import PetEmail from '../Pets/PetEmail';
 
 const PetSwipe = (props) => {
+
     const [allPets, setAllPets] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
     const [animating, setAnimating] = useState(false);
@@ -11,6 +12,13 @@ const PetSwipe = (props) => {
     const [owner, setOwner] = useState([]);
     const [owners, setOwners] = useState([]);
     const [modal, setModal] = useState(false);
+    const [userToken, setUserToken] = useState(props.token);
+
+    const emailHeader = {
+        fontWeight: "900",
+        fontSize: "30px",
+        letterSpacing: "-1px"
+    }
 
     const toggle = () => setModal(!modal);
 
@@ -19,19 +27,19 @@ const PetSwipe = (props) => {
         fetchOwners();
     }, []);
 
-  const next = () => {
-    const nextIndex = activeIndex === allPets.length - 1 ? 0 : activeIndex + 1;
-    setActiveIndex(nextIndex);
-  }
+    const next = () => {
+        const nextIndex = activeIndex === allPets.length - 1 ? 0 : activeIndex + 1;
+        setActiveIndex(nextIndex);
+    }
 
-  const previous = () => {
-    const nextIndex = activeIndex === 0 ? allPets.length - 1 : activeIndex - 1;
-    setActiveIndex(nextIndex);
-  }
+    const previous = () => {
+        const nextIndex = activeIndex === 0 ? allPets.length - 1 : activeIndex - 1;
+        setActiveIndex(nextIndex);
+    }
 
-  const goToIndex = (newIndex) => {
-    setActiveIndex(newIndex);
-  } 
+    const goToIndex = (newIndex) => {
+        setActiveIndex(newIndex);
+    } 
 
     const fetchPets = (gender, city, state) => {
         let url = '';
@@ -87,12 +95,13 @@ const PetSwipe = (props) => {
            headers: new Headers ({
            'Content-Type': 'application/json',
         })
-     }).then((res) => res.json())
+     })
+     .then((res) => res.json())
      .then((petOwners) => {
         setOwners(petOwners)
         console.log(petOwners)
         })
-        }
+    }
 
     const slides = () => {
         return allPets.map((pet) => {
@@ -100,7 +109,6 @@ const PetSwipe = (props) => {
             let updatedAt = new Date(pet.updatedAt).toLocaleDateString();
             let ownerid = (pet.ownerid);
             let obj = owners.find(obj => obj.id == ownerid);
-            console.log(obj);
     
             return (
                 <CarouselItem onExiting={() => setAnimating(true)} onExited={() => setAnimating(false)} key={pet.id}>
@@ -112,6 +120,8 @@ const PetSwipe = (props) => {
                             <div>
                                 <br></br>❝{pet.description}❞<br></br><br></br>
                             </div>
+                            <div id="pet-email" style={{display: "none"}}>{pet.ownerid}</div>
+                            <div id="pet-id" style={{display: "none"}}>{pet.id}</div>
                             
                         
                         
@@ -119,8 +129,9 @@ const PetSwipe = (props) => {
                             <div className="emailheart"><Button onClick={toggle} style={{backgroundColor: "white", border: "none"}}><img src="https://i.imgur.com/6OeNu0a.png"/></Button></div>
                             <div className="bottom-text">Last Updated: {updatedAt}</div>
                             <Modal isOpen={modal} toggle={toggle}>
+                            <h2 class="emailheader">it's a match!<br/>say hi!</h2><br/>
                                 <ModalBody>
-                                    <PetEmail owner={obj}/>
+                                    <PetEmail token={userToken} />
                                 </ModalBody>
                             </Modal>
                     </div> 
@@ -168,4 +179,3 @@ const PetSwipe = (props) => {
 }
  
 export default PetSwipe;
-
