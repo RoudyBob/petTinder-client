@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import emailjs from 'emailjs-com';
-import {Form} from 'reactstrap';
+import {Form, NavItem} from 'reactstrap';
 
 const PetEmail = (props) => {
 
-  const ownerid = document.getElementById("pet-email").innerHTML;
-  const petid = document.getElementById("pet-id").innerHTML;
+  const ownerid = document.querySelector("div.carousel-item.active > div > div.pet-carousel > div#pet-email").innerHTML;
+  const petid = document.querySelector("div.carousel-item.active > div > div.pet-carousel > div#pet-id").innerHTML;
   
   const [sendFromEmail, setSendFromEmail] = useState('');
   const [userToken, setUserToken] = useState(props.token);
@@ -17,6 +17,7 @@ const PetEmail = (props) => {
 
   const getOwner = () => {
     let url = `http://localhost:3000/user/byid/${ownerid}`
+    console.log(`this is the url ${url}`)
     fetch(url, {
       method: 'GET',
       headers: new Headers ({
