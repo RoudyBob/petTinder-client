@@ -175,3 +175,14 @@
   display: flex;
   justify-content: left;
 }
+
+.modal-body {
+  color: hotpink;
+  font-weight: bold;
+}
+
+.modal-header {
+  color: coral;
+  font-weight: bold;
+  font-size: 30px;
+}
