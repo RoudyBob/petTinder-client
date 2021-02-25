@@ -8,7 +8,6 @@ const PetEdit = (props) => {
     const [editState, setEditState] = useState(props.petToUpdate.statelocation);
     const [editDescription, setEditDescription] = useState(props.petToUpdate.description);
     const [editPhotoUrl, setEditPhotoUrl] = useState(props.petToUpdate.photourl);
-    
     const [file, setFile] = useState(''); // storing the uploaded file  
     const [data, getFile] = useState({ name: "", path: "" }); // storing the recived file from backend
     const [fileInputKey, setFileInputKey] = useState('');
@@ -67,7 +66,7 @@ const PetEdit = (props) => {
 
     return(
         <Modal isOpen={true}>
-            <ModalHeader>need to update some info?</ModalHeader>
+            <h2 class="edithead">need to update some info?</h2>
             <ModalBody>
                 <Form onSubmit={petUpdate}>
                     <FormGroup>
@@ -95,7 +94,7 @@ const PetEdit = (props) => {
 
                         <Input type="file" id="photopicker" accept="image/*" onChange={fileInputChange} key={fileInputKey} />
                     </FormGroup>
-                    <Button type="submit">Submit</Button>
+                    <Button type="submit" class="submitbutton2">Submit</Button>
                 </Form>
             </ModalBody>
         </Modal>

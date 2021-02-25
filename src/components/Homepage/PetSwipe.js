@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption, Input, Form, Button, ModalBody, Modal} from 'reactstrap';
+import {Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption, Input, Form, Button, ModalBody, Modal, ModalHeader} from 'reactstrap';
 import PetEmail from '../Pets/PetEmail';
 
 const PetSwipe = (props) => {
@@ -13,6 +13,12 @@ const PetSwipe = (props) => {
     const [owners, setOwners] = useState([]);
     const [modal, setModal] = useState(false);
     const [userToken, setUserToken] = useState(props.token);
+
+    const emailHeader = {
+        fontWeight: "900",
+        fontSize: "30px",
+        letterSpacing: "-1px"
+    }
 
     const toggle = () => setModal(!modal);
 
@@ -123,6 +129,7 @@ const PetSwipe = (props) => {
                             <div className="emailheart"><Button onClick={toggle} style={{backgroundColor: "white", border: "none"}}><img src="https://i.imgur.com/6OeNu0a.png"/></Button></div>
                             <div className="bottom-text">Last Updated: {updatedAt}</div>
                             <Modal isOpen={modal} toggle={toggle}>
+                            <h2 class="emailheader">it's a match!<br/>say hi!</h2><br/>
                                 <ModalBody>
                                     <PetEmail token={userToken} />
                                 </ModalBody>
@@ -172,4 +179,3 @@ const PetSwipe = (props) => {
 }
  
 export default PetSwipe;
-
