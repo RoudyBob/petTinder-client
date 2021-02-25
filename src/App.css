@@ -212,7 +212,8 @@
   border-radius: 3px;
   margin-top: 40px;
   margin-bottom: 30px;
-  margin-left: 180px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .submitbutton2 {
@@ -231,6 +232,7 @@ input {
   border-style: solid;
   border-width: 2px;
   border-radius: 4px;
+  width: 195px;
 }
 
 textarea {
@@ -238,4 +240,15 @@ textarea {
   border-width: 2px;
   border-radius: 4px;
   padding: 10px;
+  width: 250px;
+}
+
+ #photopicker {
+  border-color:lightgray;
+  border-width: 1px;
+}
+
+label {
+  color: hotpink;
+  font-weight: 500;
 }

@@ -84,7 +84,11 @@ const PetEmail = (props) => {
           <td><label>Message:&nbsp;</label></td>
           <td><textarea name="message" /></td>
         </tr>
+        <tr>
+          <td colspan = "2">
         <center><div><input type="submit" value="Send" class="submitbutton"/></div></center>
+        </td>
+        </tr>
       </table>
     </form>
   );
