@@ -232,7 +232,6 @@ input {
   border-style: solid;
   border-width: 2px;
   border-radius: 4px;
-  width: 195px;
 }
 
 textarea {
@@ -249,6 +248,9 @@ textarea {
 }
 
 label {
-  color: hotpink;
   font-weight: 500;
+}
+
+form {
+  color: hotpink;
 }
