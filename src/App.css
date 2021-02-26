@@ -212,7 +212,8 @@
   border-radius: 3px;
   margin-top: 40px;
   margin-bottom: 30px;
-  margin-left: 180px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .submitbutton2 {
@@ -233,9 +234,28 @@ input {
   border-radius: 4px;
 }
 
+.form-control-file {
+  border: none;
+  border: 1px lightgray solid;
+}
+
 textarea {
   border-color: rgb(255, 139, 197);
   border-width: 2px;
   border-radius: 4px;
   padding: 10px;
+  width: 250px;
+}
+
+ #photopicker {
+  border-color:lightgray;
+  border-width: 1px;
+}
+
+label {
+  font-weight: 500;
+}
+
+form {
+  color: hotpink;
 }
