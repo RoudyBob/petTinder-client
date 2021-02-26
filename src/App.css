@@ -233,6 +233,11 @@ input {
   border-radius: 4px;
 }
 
+.form-control-file {
+  border: none;
+  border: 1px lightgray solid;
+}
+
 textarea {
   border-color: rgb(255, 139, 197);
   border-width: 2px;

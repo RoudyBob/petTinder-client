@@ -24,6 +24,7 @@ const PetSwipe = (props) => {
 
     useEffect(() => {
         fetchPets(searchGender,searchCity,'');
+        console.log('in use effect');
         fetchOwners();
     }, []);
 
@@ -99,13 +100,13 @@ const PetSwipe = (props) => {
      .then((res) => res.json())
      .then((petOwners) => {
         setOwners(petOwners)
-        console.log(petOwners)
+        // console.log(petOwners)
         })
     }
 
     const slides = () => {
         return allPets.map((pet) => {
-            console.log(pet.updatedAt);
+            // console.log(pet.updatedAt);
             let updatedAt = new Date(pet.updatedAt).toLocaleDateString();
             let ownerid = (pet.ownerid);
             let obj = owners.find(obj => obj.id == ownerid);
@@ -130,7 +131,7 @@ const PetSwipe = (props) => {
                             <div className="bottom-text">Last Updated: {updatedAt}</div>
                             <Modal isOpen={modal} toggle={toggle}>
                             <h2 class="emailheader">it's a match!<br/>say hi!</h2><br/>
-                                <ModalBody>
+                                <ModalBody id={pet.id}>
                                     <PetEmail token={userToken} />
                                 </ModalBody>
                             </Modal>

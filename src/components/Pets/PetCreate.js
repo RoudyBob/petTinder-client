@@ -55,6 +55,7 @@ const PetCreate = (props) => {
             setFileInputKey(Date.now()); //resets key on File Input which re-renders it to clear out filename
             props.fetchPets();
         })
+        .catch((err) => console.log(err));
     }
 
     const fileInputChange = (e) => {
