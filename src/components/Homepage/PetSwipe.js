@@ -14,13 +14,30 @@ const PetSwipe = (props) => {
     const [modal, setModal] = useState(false);
     const [userToken, setUserToken] = useState(props.token);
 
+
     const emailHeader = {
         fontWeight: "900",
         fontSize: "30px",
         letterSpacing: "-1px"
     }
 
-    const toggle = () => setModal(!modal);
+    const toggle = () => {
+        setModal(!modal);
+        const petid = document.querySelector("div.carousel-item.active > div > div.pet-carousel > div#pet-id").innerHTML;
+        if (!modal) {
+        fetch(`http://localhost:3000/user/${petid}`, {
+            method: "PUT",
+            headers: new Headers ({
+              'Content-Type': 'application-json',
+              'Authorization': userToken
+            })
+          })
+          .then((response) => response.json())
+          .then((records) => console.log(`liked ${records} pet`))
+
+        }
+    }
+
 
     useEffect(() => {
         fetchPets(searchGender,searchCity,'');
