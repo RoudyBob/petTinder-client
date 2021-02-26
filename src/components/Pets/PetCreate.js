@@ -35,6 +35,9 @@ const PetCreate = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (!formValidation()) {
+            return false
+        } else {
         uploadFile();
         fetch('http://localhost:3000/pet/', {
             method: 'POST',
@@ -56,6 +59,33 @@ const PetCreate = (props) => {
             props.fetchPets();
         })
         .catch((err) => console.log(err));
+    }
+    }
+    const formValidation = () => {
+        if (dogname == "") {
+            alert("Name must be filled out");
+            return false;
+          } else if (breed == "") {
+            alert("Breed must be filled out");
+            return false;
+          } else if (gender == "") {
+            alert("Gender must be filled out");
+            return false;
+          } else if (citylocation == "") {
+            alert("City must be filled out");
+            return false;
+          } else if (statelocation == "") {
+            alert("State must be filled out");
+            return false;
+          } else if (description == "") {
+            alert("Description must be filled out");
+            return false;
+          } else if (photourl == "") {
+            alert("Photo upload required");
+            return false;
+          } else {
+              return true;
+          }
     }
 
     const fileInputChange = (e) => {

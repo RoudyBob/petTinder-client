@@ -122,7 +122,6 @@ const PetSwipe = (props) => {
 
     const slides = () => {
         return allPets.map((pet) => {
-            // console.log(pet.updatedAt);
             let updatedAt = new Date(pet.updatedAt).toLocaleDateString();
             let ownerid = (pet.ownerid);
             let obj = owners.find(obj => obj.id == ownerid);
