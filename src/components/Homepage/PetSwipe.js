@@ -62,8 +62,24 @@ const PetSwipe = (props) => {
             })
         })
         .then((res) => res.json())
-        .then((petAll) => { setAllPets(petAll) })
-    }
+        .then((petAll) => {
+            if (petAll.length == 0){
+                let dummyPet=[{
+                    dogname: "Mystery",
+                    breed: "Super Secret",
+                    gender: "Your guess is as good as mine.",
+                    citylocation: "",
+                    statelocation:"",
+                    description: "Sorry, no results found. (｡•́︿•̀｡)",
+                    photourl: "https://static.boredpanda.com/blog/wp-content/uploads/2015/01/hiding-ninja-funny-dogs-29__605.jpg",
+                    updatedAt: Date()
+                }]
+                setAllPets(dummyPet)
+            } else {
+            setAllPets(petAll)
+            }
+    })
+}
 
     const genderSelection = (e) => {
         let gender = e.target.value;
@@ -114,7 +130,7 @@ const PetSwipe = (props) => {
             return (
                 <CarouselItem onExiting={() => setAnimating(true)} onExited={() => setAnimating(false)} key={pet.id}>
                     <div>
-                        <center><img src={pet.photourl} style={{height: 400 + 'px', width: 'auto', padding: 30 + 'px'}}/></center>
+                        <center><img src={pet.photourl} style={{height: 'auto', maxWidth: 400 + 'px', padding: 30 + 'px'}}/></center>
                         <div className="pet-carousel">
                             <div className="pet-header">{pet.dogname} | {pet.breed} | {pet.gender}</div><br/>
                             <div className="citystate">{pet.citylocation}, {pet.statelocation}</div>
