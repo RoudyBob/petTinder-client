@@ -61,8 +61,24 @@ const PetSwipe = (props) => {
             })
         })
         .then((res) => res.json())
-        .then((petAll) => { setAllPets(petAll) })
-    }
+        .then((petAll) => {
+            if (petAll.length == 0){
+                let dummyPet=[{
+                    dogname: "Mystery",
+                    breed: "Super Secret",
+                    gender: "Your guess is as good as mine.",
+                    citylocation: "",
+                    statelocation:"",
+                    description: "Sorry, no results found. (｡•́︿•̀｡)",
+                    photourl: "https://static.boredpanda.com/blog/wp-content/uploads/2015/01/hiding-ninja-funny-dogs-29__605.jpg",
+                    updatedAt: Date()
+                }]
+                setAllPets(dummyPet)
+            } else {
+            setAllPets(petAll)
+            }
+    })
+}
 
     const genderSelection = (e) => {
         let gender = e.target.value;
