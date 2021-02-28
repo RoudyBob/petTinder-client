@@ -38,7 +38,7 @@ const PetIndex = (props) => {
 
     const editPet = (pet) => {
         setPetToUpdate(pet);
-        console.log(pet);
+        // console.log(pet);
     };
 
     const updateOn = () =>  {
@@ -48,7 +48,6 @@ const PetIndex = (props) => {
     const updateOff = () => {
         setUpdateActive(false);
     }
-
 
     return (
         <div style={divStyle}>
