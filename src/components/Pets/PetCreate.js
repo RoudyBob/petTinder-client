@@ -38,29 +38,30 @@ const PetCreate = (props) => {
         if (!formValidation()) {
             return false
         } else {
-        uploadFile();
-        fetch('http://localhost:3000/pet/', {
-            method: 'POST',
-            body: JSON.stringify({dogname: dogname, breed: breed, gender: gender, citylocation: citylocation, statelocation: statelocation, description: description, photourl: photourl}),
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': props.token
+            uploadFile();
+            fetch('http://localhost:3000/pet/', {
+                method: 'POST',
+                body: JSON.stringify({dogname: dogname, breed: breed, gender: gender, citylocation: citylocation, statelocation: statelocation, description: description, photourl: photourl}),
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'Authorization': props.token
+                })
+            }) .then ((res) => res.json())
+            .then((petData) => {
+                console.log(petData);
+                setDogName('');
+                setBreed('');
+                setGender('');
+                setCityLocation('');
+                setStateLocation('');
+                setDescription('');
+                setFileInputKey(Date.now()); //resets key on File Input which re-renders it to clear out filename
+                props.fetchPets();
             })
-        }) .then ((res) => res.json())
-        .then((petData) => {
-            console.log(petData);
-            setDogName('');
-            setBreed('');
-            setGender('');
-            setCityLocation('');
-            setStateLocation('');
-            setDescription('');
-            setFileInputKey(Date.now()); //resets key on File Input which re-renders it to clear out filename
-            props.fetchPets();
-        })
-        .catch((err) => console.log(err));
+            .catch((err) => console.log(err));
+        }
     }
-    }
+    
     const formValidation = () => {
         if (dogname == "") {
             alert("Name must be filled out");
@@ -122,11 +123,11 @@ const PetCreate = (props) => {
             console.log(res);
             getFile({ name: res.data.name, path: 'http://localhost:3000' + res.data.path })
         })
-        .catch(err => console.log(err))}
+        .catch(err => console.log(err))
+    }
 
     return ( 
         <>
-            
             <Form onSubmit={handleSubmit} style={formStyle}>
                 <FormGroup>
                     <center><h3 style={titleStyle}>submit your pooch!</h3></center>
