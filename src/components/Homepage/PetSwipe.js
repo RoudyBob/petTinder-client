@@ -9,7 +9,6 @@ const PetSwipe = (props) => {
     const [animating, setAnimating] = useState(false);
     const [searchGender, setSearchGender] = useState('Both');
     const [searchCity, setSearchCity] = useState('');
-    const [owner, setOwner] = useState([]);
     const [owners, setOwners] = useState([]);
     const [modal, setModal] = useState(false);
     const [userToken, setUserToken] = useState(props.token);
@@ -25,23 +24,35 @@ const PetSwipe = (props) => {
         setModal(!modal);
         const petid = document.querySelector("div.carousel-item.active > div > div.pet-carousel > div#pet-id").innerHTML;
         if (!modal) {
-        fetch(`http://localhost:3000/user/${petid}`, {
-            method: "PUT",
-            headers: new Headers ({
-              'Content-Type': 'application-json',
-              'Authorization': userToken
+            // Get a list of liked pets for the current user
+            fetch(`http://localhost:3000/user/current`, {
+                method: "GET",
+                headers: new Headers ({
+                    'Content-Type': 'application-json',
+                    'Authorization': userToken
+                })
             })
-          })
-          .then((response) => response.json())
-          .then((records) => console.log(`liked ${records} pet`))
-
-        }
-    }
+            .then((response) => response.json())
+            .then((user) => { //Only add the pet to likedpets if it doesn't already exist
+                if (!user.likedpets.includes(petid)) {
+                    fetch(`http://localhost:3000/user/like/${petid}`, {
+                        method: "PUT",
+                        headers: new Headers ({
+                          'Content-Type': 'application-json',
+                          'Authorization': userToken
+                        })
+                      })
+                      .then((response) => response.json())
+                      .then((records) => console.log(`liked ${records} pet`))
+                }
+            })
+        };
+    };
 
 
     useEffect(() => {
         fetchPets(searchGender,searchCity,'');
-        console.log('in use effect');
+        // console.log('in use effect');
         fetchOwners();
     }, []);
 
@@ -70,7 +81,7 @@ const PetSwipe = (props) => {
             (city) ? url = `http://localhost:3000/pet/city/${city}/` : url = `http://localhost:3000/pet/`
         } 
 
-        console.log(`fetch url: ${url}`);
+        // console.log(`fetch url: ${url}`);
         fetch(url, {
             method: 'GET',
             headers: new Headers ({
@@ -95,8 +106,8 @@ const PetSwipe = (props) => {
             } else {
             setAllPets(petAll)
             }
-    })
-}
+        })
+    }
 
     const genderSelection = (e) => {
         let gender = e.target.value;
@@ -122,18 +133,18 @@ const PetSwipe = (props) => {
     }
     
     const fetchOwners = () => {
-    let url = 'http://localhost:3000/user/owners';
-    console.log(url);
-    fetch(url, {
-           method: 'GET',
-           headers: new Headers ({
-           'Content-Type': 'application/json',
+        let url = 'http://localhost:3000/user/owners';
+        console.log(url);
+        fetch(url, {
+            method: 'GET',
+            headers: new Headers ({
+            'Content-Type': 'application/json',
+            })
         })
-     })
-     .then((res) => res.json())
-     .then((petOwners) => {
-        setOwners(petOwners)
-        // console.log(petOwners)
+        .then((res) => res.json())
+        .then((petOwners) => {
+            setOwners(petOwners)
+            // console.log(petOwners)
         })
     }
 
@@ -175,8 +186,7 @@ const PetSwipe = (props) => {
         })
     };
 
-    return ( 
-        
+    return (       
         <div>
             <Carousel interval={false} activeIndex={activeIndex} next={next} previous={previous}>
                 {/* <CarouselIndicators items={allPets} activeIndex={activeIndex} onClickHandler={goToIndex}/> */}

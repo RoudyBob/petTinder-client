@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
@@ -198,6 +199,10 @@
 }
 
 .heartbutton:focus{
+  outline: none;
+}
+
+.emailheart button :focus {
   outline: none;
 }
 

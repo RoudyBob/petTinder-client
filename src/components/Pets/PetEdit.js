@@ -62,20 +62,21 @@ const PetEdit = (props) => {
             console.log(res);
             getFile({ name: res.data.name, path: 'http://localhost:3000' + res.data.path })
         })
-        .catch(err => console.log(err))}
+        .catch(err => console.log(err))
+    }
 
-    return(
+    return (
         <Modal isOpen={true}>
             <h2 class="edithead">need to update some info?</h2>
             <ModalBody>
                 <Form onSubmit={petUpdate}>
                     <FormGroup>
                         <Label htmlFor="dogname">Dog's Name</Label>
-                        <Input name="name" value={editName} onChange={(e) => setEditName(e.target.value)}/>
+                        <Input name="name" value={editName} onChange={(e) => setEditName(e.target.value)} />
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor="citylocation">City</Label>
-                        <Input name="city" value={editCity} onChange={(e) => setEditCity(e.target.value)}/>
+                        <Input name="city" value={editCity} onChange={(e) => setEditCity(e.target.value)} />
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor="statelocation">State (2-letter abbr))</Label>
@@ -89,15 +90,13 @@ const PetEdit = (props) => {
                         <img src={props.petToUpdate.photourl} width = "100px" />
                         <br />
                         <Label htmlFor="photourl">Current Photo</Label>
-
-                        {/* <Input name="photo" value={editPhotoUrl} onChange={(e) => setEditPhotoUrl(e.target.value)} /> */}
-
                         <Input type="file" id="photopicker" accept="image/*" onChange={fileInputChange} key={fileInputKey} />
                     </FormGroup>
                     <Button type="submit" class="submitbutton2">Submit</Button>
                 </Form>
             </ModalBody>
         </Modal>
-    )
-}
+    );
+};
+
 export default PetEdit;

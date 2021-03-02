@@ -31,7 +31,6 @@ const clearToken =() => {
   setSessionToken('');
 }
 
-
 const petIndexView = () => {
   return (sessionToken === localStorage.getItem('token') ? <PetIndex token={sessionToken} /> : <Auth updateToken={updateToken} />)
 };

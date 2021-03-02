@@ -5,9 +5,7 @@ import {Form, NavItem} from 'reactstrap';
 const PetEmail = (props) => {
 
   const ownerid = document.querySelector("div.carousel-item.active > div > div.pet-carousel > div#pet-email").innerHTML;
-  // const petid = document.querySelector("div.carousel-item.active > div > div.pet-carousel > div#pet-id").innerHTML;
   
-  const [sendFromEmail, setSendFromEmail] = useState('');
   const [userToken, setUserToken] = useState(props.token);
   const [currentUser, setCurrentUser] = useState('');
   const [owner, setOwner] = useState(props.owner);
@@ -33,18 +31,6 @@ const PetEmail = (props) => {
       setOwnerUserName(owner.username);
     })
   }
-
-  // const likePet = () => {
-  //   fetch(`http://localhost:3000/user/${petid}`, {
-  //     method: "PUT",
-  //     headers: new Headers ({
-  //       'Content-Type': 'application-json',
-  //       'Authorization': userToken
-  //     })
-  //   })
-  //   .then((response) => response.json())
-  //   .then((records) => console.log(`liked ${records} pet`))
-  // }
 
   const getCurrentUser = () => {
     fetch ('http://localhost:3000/user/current', {
