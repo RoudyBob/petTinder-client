@@ -175,6 +175,31 @@
 .emailheart {
   display: flex;
   justify-content: left;
+  
+}
+.emailheart:active {
+  outline: none;
+}
+
+.emailheart:focus {
+  outline: none;
+}
+
+.heartbutton {
+  transition: all 0.5s ease;
+}
+
+.heartbutton:hover{
+  opacity: 0.5;
+  position: relative;
+}
+
+.heartbutton:active{
+  outline: none;
+}
+
+.heartbutton:focus{
+  outline: none;
 }
 
 .emailheart button :focus {
