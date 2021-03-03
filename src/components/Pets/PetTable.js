@@ -53,7 +53,7 @@ const PetTable = (props) => {
         return props.pets.map((pet, index) => {
             return (
                 <tr key={index}>
-                    <th scope="row">{pet.dogname}</th>
+                    <td><strong>{pet.dogname}</strong></td>
                     <td>{pet.breed}</td>
                     <td>{pet.gender}</td>
                     <td>{pet.citylocation}, {pet.statelocation}</td>
@@ -91,6 +91,7 @@ const PetTable = (props) => {
                         <th style={labelColor}>Location</th>
                         <th style={labelColor}>Photo</th>
                         <th style={labelColor}>Description</th>
+                        <th style={labelColor}></th>
                     </tr>
                 </thead>
                 <tbody>

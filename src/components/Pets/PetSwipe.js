@@ -110,6 +110,7 @@ const PetSwipe = (props) => {
     }
 
     const genderSelection = (e) => {
+        e.preventDefault();
         let gender = e.target.value;
         console.log(`Looking for all ${gender} dogs.`);
         setSearchGender(gender);
@@ -124,6 +125,7 @@ const PetSwipe = (props) => {
     }
 
     const clearFilters = (e) => {
+        e.preventDefault();
         let gender = 'Both';
         let city = null;
         setSearchGender('Both');
