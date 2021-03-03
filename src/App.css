@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
@@ -50,11 +51,14 @@
   max-width: 750px;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
+  top: 100px;
 }
 
 .carousel-inner {
   max-width: 550px;
   margin: auto;
+  background-color: white;
 }
 
 
@@ -79,13 +83,209 @@
  }
 
  .pet-carousel {
-   color: white;
+   color: hotpink;
    position: relative;
-   top: -200px;
+   top: 0px;
    left: 20px;
+   text-align: center;
+   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   font-weight: bold;
+   font-size: 26px;
  }
 
- .carousel-indicators {
+ /* .carousel-indicators {
   position: relative;
   top: 370px;
+} */
+
+.searchContainer {
+  padding: 10px;
+  margin: auto;
+  margin-top: 150px;
+  display: flex;
+  background: linear-gradient(to right, hotpink, coral);
+  width: 500px;
+  color: white;
+  align-items: flex-start;
+}
+
+.genderFilter {
+  flex: 1 0 auto;
+}
+
+.genderFilter input {
+  cursor: pointer;
+}
+
+.cityFilter {
+  flex: 1 0 auto;
+}
+
+.cityFilter input {
+  width: 75%;
+  outline: none;
+}
+
+.cityFilter button {
+  margin-left: 5px;
+  background-color: hotpink;
+  border: none;
+  letter-spacing: -1px;
+  color: white;
+}
+
+.clearFilter {
+  margin: auto;
+  text-align: center;
+}
+
+.clearFilter button {
+  margin-top: 10px;
+  background-color: hotpink;
+  border: none;
+  letter-spacing: -1px;
+  color: white;
+  padding-top: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 5px;
+}
+
+.bottom-text {
+  text-align: right;
+  padding-right: 40px;
+  font-size: 12px;
+  font-weight: bold;
+  color: grey;
+}
+
+.pet-header{
+  font-size: 20px;
+  font-weight: bold;
+  color: coral;
+  letter-spacing: -.5px;
+}
+
+.citystate{
+  margin-top: -30px;
+  font-weight: 400;
+  color: coral;
+}
+
+.emailheart {
+  display: flex;
+  justify-content: left;
+  
+}
+.emailheart:active {
+  outline: none;
+}
+
+.emailheart:focus {
+  outline: none;
+}
+
+.heartbutton {
+  transition: all 0.5s ease;
+}
+
+.heartbutton:hover{
+  opacity: 0.5;
+  position: relative;
+}
+
+.heartbutton:active{
+  outline: none;
+}
+
+.heartbutton:focus{
+  outline: none;
+}
+
+.emailheart button :focus {
+  outline: none;
+}
+
+.modal-body {
+  color: hotpink;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-header {
+  color: coral;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+  margin-left: 180px;
+}
+
+.emailheader {
+  color: coral;
+  text-align: center;
+  padding: 20px;
+}
+
+.edithead {
+  color: coral;
+  text-align: center;
+  padding: 20px;
+}
+
+.submitbutton {
+  background-color: hotpink;
+  color: white;
+  border-style: solid;
+  border-color: rgb(250, 80, 165);
+  border-radius: 3px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.submitbutton2 {
+  background-color: hotpink;
+  color: white;
+  border-style: solid;
+  border-color: rgb(250, 80, 165);
+  border-radius: 3px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  margin-left: 120px;
+}
+
+input {
+  border-color: rgb(255, 139, 197);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 4px;
+}
+
+.form-control-file {
+  border: none;
+  border: 1px lightgray solid;
+}
+
+textarea {
+  border-color: rgb(255, 139, 197);
+  border-width: 2px;
+  border-radius: 4px;
+  padding: 10px;
+  width: 250px;
+}
+
+ #photopicker {
+  border-color:lightgray;
+  border-width: 1px;
+}
+
+label {
+  font-weight: 500;
+}
+
+form {
+  color: hotpink;
 }

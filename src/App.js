@@ -8,6 +8,8 @@ import PetIndex from './components/Pets/PetIndex';
 import PetSwipe from './components/Homepage/PetSwipe';
 import './myStyles.css'
 import Signup from './Auth/Signup';
+import PetEmail from './components/Pets/PetEmail';
+import LikedPetsIndex from './components/Pets/LikedPetsIndex';
 
 function App() {
 
@@ -30,13 +32,20 @@ const clearToken =() => {
   setSessionToken('');
 }
 
-
 const petIndexView = () => {
   return (sessionToken === localStorage.getItem('token') ? <PetIndex token={sessionToken} /> : <Auth updateToken={updateToken} />)
 };
 
+const likedPetsView = () => {
+  return (sessionToken === localStorage.getItem('token') ? <LikedPetsIndex token={sessionToken} /> : <Auth updateToken={updateToken} />)
+};
+
 const petSwipeView = () => {
   return (sessionToken === localStorage.getItem('token') ? <PetSwipe token={sessionToken} /> : <Auth updateToken={updateToken} />)
+};
+
+const petEmailView = () => {
+  return (sessionToken === localStorage.getItem('token') ? <PetEmail token={sessionToken} /> : <Auth updateToken={updateToken} />)
 };
 
 const signupView = () => {
@@ -52,7 +61,9 @@ const signupView = () => {
         <Switch>
           <Route exact path="/" component={petSwipeView} />
           <Route path="/mypets" component={petIndexView} />
+          <Route path="/likedpets" component={likedPetsView} />
           <Route path="/signup" component={signupView} />
+          <Route path="/email" component={petEmailView} />
         </Switch>
       </BrowserRouter>
     </div>
