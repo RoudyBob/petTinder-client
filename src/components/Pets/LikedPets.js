@@ -1,9 +1,9 @@
-import {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Table, Button} from 'reactstrap';
 
 const LikedPets = (props) => {
-    console.log(props.user);
 
+    const [petsArray, setPetsArray] = useState('');
 
     const tableStyle={
         backgroundColor: "white",
@@ -50,20 +50,46 @@ const LikedPets = (props) => {
     }
 
     const petMapper = () => {
-        // console.log(userInfo)
-        return props.user.map((pet, index) => {
-            return (
-                <tr key={index}>
-                    <th scope="row">{pet.dogname}</th>
-                    <td>{pet.breed}</td>
-                    <td>{pet.gender}</td>
-                    <td>{pet.citylocation}, {pet.statelocation}</td>
-                    <td><img src={pet.photourl} width="100px"/></td>
-                    <td>{pet.description}</td>
-                </tr>
-            )
-        })
+        if (Array.isArray(petsArray)) {
+        return petsArray.map((pet, index) => {
+                return (
+                    <tr key={index}>
+                        <td><strong>{pet.dogname}</strong></td>
+                        <td>{pet.breed}</td>
+                        <td>{pet.gender}</td>
+                        <td>{pet.citylocation}, {pet.statelocation}</td>
+                        <td><img src={pet.photourl} width="100px"/></td>
+                        <td>{pet.description}</td>
+                        <td>
+                            <Button onClick={() => {unlikePet(pet)}} style={deleteButton}>Unlike</Button>
+                        </td>
+                    </tr>
+                )
+            }
+        )
+        }
     }
+
+    const unlikePet = (pet) => {
+        fetch(`http://localhost:3000/user/unlike/${pet.id}`, {
+            method: 'PUT',
+            headers: new Headers ({
+                'Content-Type': 'application/json',
+                'Authorization': props.token
+            })
+        })
+            .then((() => {
+                setPetsArray([]);
+                props.fetchPets()
+            }))
+    };
+
+    useEffect(() => {
+        console.log(props.pets.id);
+        if (props.pets.id != undefined) {
+            setPetsArray([...petsArray, props.pets]);
+        }
+    },[props.pets])
 
     return (
         <div style={divStyle}>
@@ -77,6 +103,7 @@ const LikedPets = (props) => {
                         <th style={labelColor}>Location</th>
                         <th style={labelColor}>Photo</th>
                         <th style={labelColor}>Description</th>
+                        <th style={labelColor}></th>
                     </tr>
                 </thead>
                 <tbody>

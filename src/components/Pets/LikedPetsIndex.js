@@ -5,8 +5,8 @@ import LikedPets from './LikedPets';
 
 const LikedPetsIndex = (props) => {
    
-    const [likedpets, setLikedPets] = useState([]);
-    const [userData, setUserData] = useState({});
+    const [pets, setPets] = useState([]);
+    const [userInfo, setUserInfo] = useState({});
 
     const divStyle={
         padding: "30px",
@@ -16,7 +16,6 @@ const LikedPetsIndex = (props) => {
 
     
     const fetchPets = () => {
-
         fetch(`http://localhost:3000/user/current`, {
                 method: "GET",
                 headers: new Headers ({
@@ -26,18 +25,24 @@ const LikedPetsIndex = (props) => {
             })
             .then((response) => response.json())
             .then((user) => {
-                setUserData(user)
-                console.log(userData)
-                }
-            )
-            
+                // console.log(user.likedpets);
+                user.likedpets.map((petid, index) => {
+                    fetch(`http://localhost:3000/pet/${petid}`, {
+                        method: "GET",
+                        headers: new Headers ({
+                          'Content-Type': 'application-json',
+                          'Authorization': props.token
+                        })
+                    })
+                    .then((response) => response.json())
+                    .then((pet) => setPets(pet))
+                })
+            })
     };
-
 
     useEffect(() => {
         fetchPets();
     }, []);
-
 
     return (
         <div style={divStyle}>
@@ -46,7 +51,7 @@ const LikedPetsIndex = (props) => {
                     </Col>
                     <br/>
                     <Col lg>
-                        <LikedPets user={userData} token={props.token} />
+                        <LikedPets pets={pets} fetchPets={fetchPets} token={props.token} />
                     </Col>
             </Container>
         </div>
