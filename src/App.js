@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Auth from './Auth/Auth';
 import Navigation from './components/Homepage/Navigation';
 import PetIndex from './components/Pets/PetIndex';
-import PetSwipe from './components/Homepage/PetSwipe';
+import PetSwipe from './components/Pets/PetSwipe';
 import './myStyles.css'
 import Signup from './Auth/Signup';
 import PetEmail from './components/Pets/PetEmail';
