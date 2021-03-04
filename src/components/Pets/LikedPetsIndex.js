@@ -26,17 +26,19 @@ const LikedPetsIndex = (props) => {
             .then((response) => response.json())
             .then((user) => {
                 // console.log(user.likedpets);
-                user.likedpets.map((petid, index) => {
-                    fetch(`http://localhost:3000/pet/${petid}`, {
-                        method: "GET",
-                        headers: new Headers ({
-                          'Content-Type': 'application-json',
-                          'Authorization': props.token
+                if (user.likedpets) {
+                    user.likedpets.map((petid, index) => {
+                        fetch(`http://localhost:3000/pet/${petid}`, {
+                            method: "GET",
+                            headers: new Headers ({
+                              'Content-Type': 'application-json',
+                              'Authorization': props.token
+                            })
                         })
+                        .then((response) => response.json())
+                        .then((pet) => setPets(pet))
                     })
-                    .then((response) => response.json())
-                    .then((pet) => setPets(pet))
-                })
+                }
             })
     };
 

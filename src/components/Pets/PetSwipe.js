@@ -34,7 +34,7 @@ const PetSwipe = (props) => {
             })
             .then((response) => response.json())
             .then((user) => { //Only add the pet to likedpets if it doesn't already exist
-                if (!user.likedpets.includes(petid)) {
+                if (!user.likedpets.includes(petid) && user.likedpets) {
                     fetch(`http://localhost:3000/user/like/${petid}`, {
                         method: "PUT",
                         headers: new Headers ({
