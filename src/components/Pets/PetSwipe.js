@@ -106,8 +106,8 @@ const PetSwipe = (props) => {
                     dogname: "Mystery",
                     breed: "Super Secret",
                     gender: "Your guess is as good as mine.",
-                    citylocation: "",
-                    statelocation:"",
+                    citylocation: "Anytown",
+                    statelocation:"ST",
                     description: "Sorry, no results found. (｡•́︿•̀｡)",
                     photourl: "https://static.boredpanda.com/blog/wp-content/uploads/2015/01/hiding-ninja-funny-dogs-29__605.jpg",
                     updatedAt: Date()
