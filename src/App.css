@@ -289,3 +289,13 @@ label {
 form {
   color: hotpink;
 }
+
+footer {
+  position: relative;
+  color: hotpink;
+  bottom: 0;
+}
+
+.clearFilter {
+  padding-bottom: 50px;
+}

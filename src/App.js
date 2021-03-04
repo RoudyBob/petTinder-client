@@ -66,6 +66,7 @@ const signupView = () => {
           <Route path="/email" component={petEmailView} />
         </Switch>
       </BrowserRouter>
+      <footer><center><img src=""/><img src=""/><img src=""/><br />Team Iron Man© {new Date().getFullYear()}</center></footer>
     </div>
   );
 }
