@@ -50,7 +50,7 @@ const petEmailView = () => {
 
 const signupView = () => {
   return (
-    <Signup />
+    <Signup updateToken={updateToken}/>
   )
 }
 
