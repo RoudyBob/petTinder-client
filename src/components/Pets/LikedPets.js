@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Table, Button} from 'reactstrap';
+import APIURL from '../../helpers/environment';
 
 const LikedPets = (props) => {
 
@@ -71,7 +72,7 @@ const LikedPets = (props) => {
     }
 
     const unlikePet = (pet) => {
-        fetch(`http://localhost:3000/user/unlike/${pet.id}`, {
+        fetch(`${APIURL}/user/unlike/${pet.id}`, {
             method: 'PUT',
             headers: new Headers ({
                 'Content-Type': 'application/json',
