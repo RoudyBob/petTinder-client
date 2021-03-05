@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import emailjs from 'emailjs-com';
 import {Form, NavItem} from 'reactstrap';
+import APIURL from '../../helpers/environment';
 
 const PetEmail = (props) => {
 
@@ -14,7 +15,7 @@ const PetEmail = (props) => {
   const [ownerLastName, setOwnerLastName] = useState('');
 
   const getOwner = () => {
-    let url = `http://localhost:3000/user/byid/${ownerid}`
+    let url = `${APIURL}/user/byid/${ownerid}`
     console.log(`this is the url ${url}`)
     fetch(url, {
       method: 'GET',
@@ -33,7 +34,7 @@ const PetEmail = (props) => {
   }
 
   const getCurrentUser = () => {
-    fetch ('http://localhost:3000/user/current', {
+    fetch (`${APIURL}/user/current`, {
       method: 'GET',
       headers: new Headers ({
         'Content-Type': 'application-json',

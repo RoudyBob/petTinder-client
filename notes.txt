@@ -1,0 +1,8 @@
+heroku create pettinder-client --buildpack https://github.com/mars/create-react-app-buildpack.git
+
+git add . 
+git commit -m "heroku client deploy"
+
+https://pettinder-client.herokuapp.com/ 
+
+For updating to Heroku, do npm run build every time.

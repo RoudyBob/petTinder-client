@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Container, Row, Col} from 'reactstrap';
 import LikedPets from './LikedPets';
+import APIURL from '../../helpers/environment';
 
 
 const LikedPetsIndex = (props) => {
@@ -16,7 +17,7 @@ const LikedPetsIndex = (props) => {
 
     
     const fetchPets = () => {
-        fetch(`http://localhost:3000/user/current`, {
+        fetch(`${APIURL}/user/current`, {
                 method: "GET",
                 headers: new Headers ({
                     'Content-Type': 'application-json',
@@ -28,7 +29,7 @@ const LikedPetsIndex = (props) => {
                 // console.log(user.likedpets);
                 if (user.likedpets) {
                     user.likedpets.map((petid, index) => {
-                        fetch(`http://localhost:3000/pet/${petid}`, {
+                        fetch(`${APIURL}/pet/${petid}`, {
                             method: "GET",
                             headers: new Headers ({
                               'Content-Type': 'application-json',

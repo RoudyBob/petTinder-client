@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption, Input, Form, Button, ModalBody, Modal, ModalHeader} from 'reactstrap';
 import PetEmail from '../Pets/PetEmail';
+import APIURL from '../../helpers/environment';
 
 const PetSwipe = (props) => {
 
@@ -25,7 +26,7 @@ const PetSwipe = (props) => {
         const petid = document.querySelector("div.carousel-item.active > div > div.pet-carousel > div#pet-id").innerHTML;
         if (!modal) {
             // Get a list of liked pets for the current user
-            fetch(`http://localhost:3000/user/current`, {
+            fetch(`${APIURL}/user/current`, {
                 method: "GET",
                 headers: new Headers ({
                     'Content-Type': 'application-json',
@@ -35,7 +36,7 @@ const PetSwipe = (props) => {
             .then((response) => response.json())
             .then((user) => { //Only add the pet to likedpets if it doesn't already exist
                 if (!user.likedpets) {
-                    fetch(`http://localhost:3000/user/like/${petid}`, {
+                    fetch(`${APIURL}/user/like/${petid}`, {
                         method: "PUT",
                         headers: new Headers ({
                           'Content-Type': 'application-json',
@@ -45,7 +46,7 @@ const PetSwipe = (props) => {
                       .then((response) => response.json())
                       .then((records) => console.log(`liked ${records} pet`))
                 } else if (!user.likedpets.includes(petid)) {
-                    fetch(`http://localhost:3000/user/like/${petid}`, {
+                    fetch(`${APIURL}/user/like/${petid}`, {
                         method: "PUT",
                         headers: new Headers ({
                             'Content-Type': 'application-json',
@@ -84,11 +85,11 @@ const PetSwipe = (props) => {
         let url = '';
 
         if (gender === 'Male') {
-            (city) ? url = `http://localhost:3000/pet/city/${city}/${gender}` : url = `http://localhost:3000/pet/gender/${gender}`
+            (city) ? url = `${APIURL}/pet/city/${city}/${gender}` : url = `${APIURL}/pet/gender/${gender}`
         } else if (gender === 'Female') {
-            (city) ? url = `http://localhost:3000/pet/city/${city}/${gender}` : url = `http://localhost:3000/pet/gender/${gender}`
+            (city) ? url = `${APIURL}/pet/city/${city}/${gender}` : url = `${APIURL}/pet/gender/${gender}`
         } else {
-            (city) ? url = `http://localhost:3000/pet/city/${city}/` : url = `http://localhost:3000/pet/`
+            (city) ? url = `${APIURL}/pet/city/${city}/` : url = `${APIURL}/pet/`
         } 
 
         // console.log(`fetch url: ${url}`);
@@ -145,7 +146,7 @@ const PetSwipe = (props) => {
     }
     
     const fetchOwners = () => {
-        let url = 'http://localhost:3000/user/owners';
+        let url = `${APIURL}/user/owners`;
         console.log(url);
         fetch(url, {
             method: 'GET',
