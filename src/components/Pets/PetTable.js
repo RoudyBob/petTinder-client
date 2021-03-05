@@ -1,9 +1,10 @@
 import React from 'react';
 import {Table, Button} from 'reactstrap';
+import APIURL from '../../helpers/environment';
 
 const PetTable = (props) => {
 
-    const url = "http://localhost:3000/pet";
+    const url = `${APIURL}/pet`;
 
     const tableStyle={
         backgroundColor: "white",

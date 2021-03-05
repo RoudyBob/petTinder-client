@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {Form, FormGroup, Label, Input, Button, Container} from 'reactstrap';
+import APIURL from '../helpers/environment'
 
 const Signup = (props) => {
 const [username, setUsername] = useState('');
@@ -50,7 +51,7 @@ const handleSubmit = (event) => {
     let emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(username)
     if (emailRegex && password.length >= 5) {
         console.log('Creating User')
-        fetch("http://localhost:3000/user/signup", {
+        fetch(`${APIURL}user/signup`, {
             method: 'POST',
             body: JSON.stringify({username: username, password: password, firstname: firstname, lastname: lastname}),
             headers: new Headers({

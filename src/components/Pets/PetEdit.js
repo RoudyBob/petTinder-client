@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import axios from 'axios';
+import APIURL from '../../helpers/environment';
 
 const PetEdit = (props) => {
     const [editName, setEditName] = useState(props.petToUpdate.dogname);
@@ -15,7 +16,7 @@ const PetEdit = (props) => {
     const petUpdate = (event, pet) => {
         event.preventDefault();
         uploadFile();
-        fetch(`http://localhost:3000/pet/${props.petToUpdate.id}`, {
+        fetch(`${APIURL}/pet/${props.petToUpdate.id}`, {
             method: 'PUT',
             body: JSON.stringify({dogname: editName, citylocation: editCity, statelocation: editState, description: editDescription, photourl: editPhotoUrl}),
             headers: new Headers({
@@ -50,17 +51,17 @@ const PetEdit = (props) => {
         // console.log("New File");
         // console.log(newFile);
         setFile(newFile); // storing file
-        setEditPhotoUrl(`http://localhost:3000/${newFile.name}`);
+        setEditPhotoUrl(`${APIURL}/${newFile.name}`);
     }
 
     const uploadFile = () => {
         const formData = new FormData();   
         // console.log(`photourl variable: ${photourl}`)
         formData.append('file', file); // appending file
-        axios.post('http://localhost:3000/upload', formData)
+        axios.post(`${APIURL}/upload`, formData)
         .then(res => {
             console.log(res);
-            getFile({ name: res.data.name, path: 'http://localhost:3000' + res.data.path })
+            getFile({ name: res.data.name, path: `${APIURL}` + res.data.path })
         })
         .catch(err => console.log(err))
     }

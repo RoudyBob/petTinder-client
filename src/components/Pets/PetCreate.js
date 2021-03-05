@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import axios from 'axios';
+import APIURL from '../../helpers/environment';
 
 const PetCreate = (props) => {
     const [dogname, setDogName] = useState('');
@@ -39,7 +40,7 @@ const PetCreate = (props) => {
             return false
         } else {
             uploadFile();
-            fetch('http://localhost:3000/pet/', {
+            fetch(`${APIURL}/pet/`, {
                 method: 'POST',
                 body: JSON.stringify({dogname: dogname, breed: breed, gender: gender, citylocation: citylocation, statelocation: statelocation, description: description, photourl: photourl}),
                 headers: new Headers({
@@ -111,17 +112,17 @@ const PetCreate = (props) => {
         // console.log("New File");
         // console.log(newFile);
         setFile(newFile); // storing file
-        setPhotoUrl(`http://localhost:3000/${newFile.name}`);
+        setPhotoUrl(`${APIURL}/${newFile.name}`);
     }
 
     const uploadFile = () => {
         const formData = new FormData();   
         // console.log(`photourl variable: ${photourl}`)
         formData.append('file', file); // appending file
-        axios.post('http://localhost:3000/upload', formData)
+        axios.post(`${APIURL}/upload`, formData)
         .then(res => {
             console.log(res);
-            getFile({ name: res.data.name, path: 'http://localhost:3000' + res.data.path })
+            getFile({ name: res.data.name, path: '${APIURL}' + res.data.path })
         })
         .catch(err => console.log(err))
     }
