@@ -3,8 +3,9 @@ import {Container, Row, Col} from 'reactstrap';
 import PetCreate from './PetCreate';
 import PetTable from './PetTable';
 import PetEdit from './PetEdit';
+import APIURL from '../../helpers/environment';
 
-const url = 'http://localhost:3000/pet/mine'
+const url = `${APIURL}/pet/mine`
 
 const PetIndex = (props) => {
    
