@@ -122,7 +122,7 @@ const PetCreate = (props) => {
         axios.post(`${APIURL}/upload`, formData)
         .then(res => {
             console.log(res);
-            getFile({ name: res.data.name, path: '${APIURL}' + res.data.path })
+            getFile({ name: res.data.name, path: `${APIURL}` + res.data.path })
         })
         .catch(err => console.log(err))
     }
