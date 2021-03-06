@@ -52,7 +52,7 @@ const handleSubmit = (event) => {
     if (emailRegex && password.length >= 5) {
         console.log('Creating User')
         console.log(`${APIURL}`)
-        fetch(`${APIURL}user/signup`, {
+        fetch(`${APIURL}/user/signup`, {
             method: 'POST',
             body: JSON.stringify({username: username, password: password, firstname: firstname, lastname: lastname}),
             headers: new Headers({
