@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Auth from './Auth/Auth';
 import Navigation from './components/Homepage/Navigation';
@@ -25,7 +25,10 @@ const updateToken = (newToken) => {
   localStorage.setItem('token', newToken);
   setSessionToken(newToken);
   console.log(newToken);
+  history.push('/');
 }
+
+let history = useHistory();
 
 const clearToken =() => {
   localStorage.clear();
@@ -41,6 +44,7 @@ const likedPetsView = () => {
 };
 
 const petSwipeView = () => {
+  console.log('In petSwipeView');
   return (sessionToken === localStorage.getItem('token') ? <PetSwipe token={sessionToken} /> : <Auth updateToken={updateToken} />)
 };
 
@@ -50,13 +54,12 @@ const petEmailView = () => {
 
 const signupView = () => {
   return (
-    <Signup />
+    <Signup updateToken={updateToken} />
   )
 }
 
   return (
     <div>
-      <BrowserRouter>
         <Navigation clickLogout={clearToken} />
         <Switch>
           <Route exact path="/" component={petSwipeView} />
@@ -65,7 +68,6 @@ const signupView = () => {
           <Route path="/signup" component={signupView} />
           <Route path="/email" component={petEmailView} />
         </Switch>
-      </BrowserRouter>
       <footer><center><img src="https://i.imgur.com/mUK0VdR.png"/>  <img src="https://i.imgur.com/yRFnrgv.png"/>  <img src="https://i.imgur.com/JHNTDMF.png"/><br />Team Iron Man© {new Date().getFullYear()}</center></footer>
     </div>
   );
