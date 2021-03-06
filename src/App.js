@@ -25,6 +25,7 @@ const updateToken = (newToken) => {
   localStorage.setItem('token', newToken);
   setSessionToken(newToken);
   console.log(newToken);
+  
   history.push('/');
 }
 
