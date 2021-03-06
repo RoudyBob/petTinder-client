@@ -72,13 +72,13 @@
   background-image: url("./assets/paw.jpg") !important;
   transform: rotate(-30deg);
   position: absolute;
-  margin-top: -200px;
+  top: 200px;
  }
 
- .carousel-control-prev {
+ /* .carousel-control-prev {
    position: relative;
    right: 300px;
- }
+ } */
  
  .carousel-caption {
    position: relative;
