@@ -112,7 +112,7 @@ const PetCreate = (props) => {
         // console.log("New File");
         // console.log(newFile);
         setFile(newFile); // storing file
-        setPhotoUrl(`${APIURL}/${newFile.name}`);
+        setPhotoUrl(`https://storage.googleapis.com/pettinder-images/${newFile.name}`);
     }
 
     const uploadFile = () => {
@@ -122,7 +122,7 @@ const PetCreate = (props) => {
         axios.post(`${APIURL}/upload`, formData)
         .then(res => {
             console.log(res);
-            getFile({ name: res.data.name, path: `${APIURL}` + res.data.path })
+            getFile({ name: res.data.name, path: res.data.data })
         })
         .catch(err => console.log(err))
     }
