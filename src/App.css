@@ -64,13 +64,13 @@
 .carousel-control-next-icon {
   background-image: url("./assets/paw.jpg") !important;
   transform: rotate(30deg);
-  position: fixed;
+  position: absolute;
  }
 
  .carousel-control-prev-icon {
   background-image: url("./assets/paw.jpg") !important;
   transform: rotate(-30deg);
-  position: fixed;
+  position: absolute;
   margin-top: -200px;
  }
 
