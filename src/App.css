@@ -65,6 +65,7 @@
   background-image: url("./assets/paw.jpg") !important;
   transform: rotate(30deg);
   position: absolute;
+  top: 200px;
  }
 
  .carousel-control-prev-icon {
